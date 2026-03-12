@@ -144,8 +144,13 @@
     }
     .nav-user-name {
       font-weight: 500;
-      color: var(--gray-700);
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(29,64,40,0.3);
+      transition: text-decoration-color 0.2s;
     }
+    .nav-user-name:hover { text-decoration-color: var(--navy); }
     .nav-logout {
       font-size: 0.72rem !important;
       font-weight: 500 !important;
@@ -1685,7 +1690,7 @@
         const name = ((meta.first_name || '') + ' ' + (meta.last_name || '')).trim();
         authItem.innerHTML =
           '<div class="nav-user">' +
-            '<span class="nav-user-name">' + name + '</span>' +
+            '<a href="profile.html" class="nav-user-name">' + name + '</a>' +
             '<button class="nav-logout" id="logoutBtn">Sign out</button>' +
           '</div>';
         document.getElementById('logoutBtn').addEventListener('click', async () => {
