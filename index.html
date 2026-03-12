@@ -82,25 +82,12 @@
 
     .nav-logo {
       display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
+      align-items: center;
     }
-    .nav-logo-word {
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #fff;
-    }
-    .nav-logo-word span { color: var(--gold-light); }
-    .nav-logo-tag {
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-400);
-      padding-bottom: 1px;
+    .nav-logo img {
+      height: 42px;
+      width: auto;
+      display: block;
     }
 
     .nav-links {
@@ -199,6 +186,12 @@
       position: relative;
       z-index: 2;
       max-width: 680px;
+    }
+    .hero-logo {
+      display: block;
+      height: 64px;
+      width: auto;
+      margin-bottom: 2.5rem;
     }
 
     .hero-eyebrow {
@@ -1118,21 +1111,10 @@
       margin-bottom: 2rem;
     }
 
-    .footer-brand-name {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #fff;
-      margin-bottom: 0.3rem;
-    }
-    .footer-brand-name span { color: var(--gold-light); }
-    .footer-brand-tag {
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-400);
+    .footer-brand-logo {
+      display: block;
+      height: 52px;
+      width: auto;
       margin-bottom: 1rem;
     }
     .footer-brand-desc {
@@ -1241,8 +1223,7 @@
   <nav id="nav">
     <div class="container nav-inner">
       <a href="#hero" class="nav-logo">
-        <span class="nav-logo-word">Bal<span>hance</span></span>
-        <span class="nav-logo-tag">Well-Being Advisory</span>
+        <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" />
       </a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -1267,6 +1248,7 @@
     <div class="hero-lines"></div>
     <div class="container">
       <div class="hero-content">
+        <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" class="hero-logo" />
         <p class="hero-eyebrow">Employee Well-Being Research &amp; Advisory</p>
         <h1 class="hero-headline">
           The science of <em>balance</em>&nbsp;—<br>
@@ -1752,8 +1734,7 @@
     <div class="container">
       <div class="footer-top">
         <div>
-          <div class="footer-brand-name">Bal<span>hance</span></div>
-          <div class="footer-brand-tag">Well-Being Research &amp; Advisory</div>
+          <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" class="footer-brand-logo" />
           <p class="footer-brand-desc">
             Helping organizations cultivate the conditions for sustainable human performance through research, advisory, and leadership coaching.
           </p>
