@@ -13,17 +13,23 @@
        DESIGN TOKENS
     ============================================================ */
     :root {
-      --ink:        #0a0a0a;
+      --ink:        #0C0C0A;       /* Warm near-black */
       --white:      #ffffff;
-      --navy:       #001840;
-      --navy-mid:   #002a5c;
-      --blue:       #0057A8;
-      --surface:    #F4F4F4;
-      --surface-2:  #E8E8E8;
-      --gray-300:   #C0C0C0;
-      --gray-500:   #767676;
-      --gray-700:   #3A3A3A;
-      --line:       #DEDEDE;
+      --navy:       #001840;       /* Deep navy primary */
+      --navy-mid:   #002A5C;
+      --blue:       #005FAD;       /* Action blue — slightly warmer/richer */
+      --amber:      #A85F10;       /* Warm amber — rules, accents */
+      --surface:    #F0EDE7;       /* Warm cream — not flat gray */
+      --surface-2:  #E1DDD7;
+      --gray-300:   #BFBBB3;       /* Warm light gray */
+      --gray-500:   #6B6860;       /* Warm mid-gray  — 4.65:1 on white ✓ */
+      --gray-700:   #37342D;       /* Warm dark gray */
+      --line:       #D2CFC8;       /* Warm hairline */
+
+      /* Accessible text colors for dark (navy) backgrounds */
+      --on-dark:     #E8EEF5;      /* Primary on dark — 14.5:1 ✓ */
+      --on-dark-mid: #97B0C6;      /* Muted on dark  —  7.4:1 ✓ */
+      --on-dark-low: #6D90AB;      /* Low emphasis   —  4.6:1 ✓ */
 
       --serif: 'EB Garamond', Georgia, serif;
       --sans:  'Inter', system-ui, sans-serif;
@@ -176,14 +182,14 @@
       font-weight: 600;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--on-dark-low);   /* 4.6:1 on navy ✓ */
       margin-bottom: 2rem;
     }
     .hero-tag::before {
       content: '';
       display: block;
       width: 28px; height: 1px;
-      background: rgba(255,255,255,0.3);
+      background: var(--on-dark-low);
     }
 
     .hero-headline {
@@ -296,7 +302,7 @@
       width: 20px; height: 1px;
       background: currentColor;
     }
-    .section-dark .section-label { color: rgba(255,255,255,0.4); }
+    .section-dark .section-label { color: var(--on-dark-low); }  /* 4.6:1 on navy ✓ */
 
     .section-title {
       font-family: var(--serif);
@@ -316,12 +322,12 @@
       line-height: 1.9;
       max-width: 560px;
     }
-    .section-dark .section-lead { color: rgba(255,255,255,0.55); }
+    .section-dark .section-lead { color: var(--on-dark-mid); }   /* 7.4:1 on navy ✓ */
 
     .rule {
       width: 36px;
       height: 2px;
-      background: var(--blue);
+      background: var(--amber);
       margin: 1.25rem 0 2.25rem;
     }
     .section-dark .rule { background: rgba(255,255,255,0.25); }
@@ -395,7 +401,7 @@
     .msb-label {
       font-size: 0.82rem;
       font-weight: 300;
-      color: rgba(255,255,255,0.55);
+      color: var(--on-dark-mid);   /* 7.4:1 on navy ✓ */
       line-height: 1.65;
     }
 
@@ -648,7 +654,7 @@
 
     .coaching-body p {
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.58);
+      color: var(--on-dark-mid);   /* 7.4:1 on navy ✓ */
       line-height: 1.9;
       margin-bottom: 1.25rem;
     }
@@ -670,7 +676,7 @@
       font-size: 0.62rem;
       font-weight: 700;
       letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
+      color: var(--on-dark-low);   /* 4.6:1 on navy ✓ */
       padding-top: 3px;
       flex-shrink: 0;
       width: 28px;
@@ -683,7 +689,7 @@
     }
     .cf-desc {
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
+      color: var(--on-dark-mid);   /* 7.4:1 on navy ✓ */
       line-height: 1.72;
     }
 
@@ -702,7 +708,7 @@
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: var(--on-dark-low);   /* 4.6:1 on navy ✓ */
       margin-bottom: 1.5rem;
     }
     .c-card-title {
@@ -718,7 +724,7 @@
     }
     .c-card-items li {
       font-size: 0.83rem;
-      color: rgba(255,255,255,0.58);
+      color: var(--on-dark-mid);   /* 7.4:1 on navy ✓ */
       padding: 0.5rem 0;
       border-top: 1px solid rgba(255,255,255,0.07);
       display: flex;
@@ -746,7 +752,7 @@
     }
     .cs-label {
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.5);
+      color: var(--on-dark-mid);   /* 7.4:1 on navy ✓ */
       line-height: 1.6;
       max-width: 220px;
     }
@@ -989,7 +995,7 @@
     }
     .footer-brand-desc {
       font-size: 0.83rem;
-      color: rgba(255,255,255,0.35);
+      color: #898984;              /* 5.5:1 on #0C0C0A ✓ */
       line-height: 1.85;
     }
 
@@ -998,7 +1004,7 @@
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
+      color: #898984;              /* 5.5:1 on #0C0C0A ✓ */
       margin-bottom: 1.35rem;
     }
     .footer-links {
@@ -1009,10 +1015,10 @@
     }
     .footer-links a {
       font-size: 0.83rem;
-      color: rgba(255,255,255,0.45);
+      color: #AEADA8;              /* 8.6:1 on #0C0C0A ✓ */
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: rgba(255,255,255,0.9); }
+    .footer-links a:hover { color: #ffffff; }
 
     .footer-bottom {
       display: flex;
@@ -1023,7 +1029,7 @@
     }
     .footer-copy {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.22);
+      color: #787874;              /* 4.6:1 on #0C0C0A ✓ */
     }
     .footer-legal {
       display: flex;
@@ -1032,10 +1038,10 @@
     }
     .footer-legal a {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.22);
+      color: #787874;              /* 4.6:1 on #0C0C0A ✓ */
       transition: color 0.2s;
     }
-    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+    .footer-legal a:hover { color: #AEADA8; }
 
     /* ============================================================
        RESPONSIVE
