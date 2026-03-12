@@ -1668,19 +1668,28 @@
   <!-- ================================================================
        SCRIPTS
   ================================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://uyucyxbytvtdbrxrjeak.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dWN5eGJ5dHZ0ZGJyeHJqZWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTE4MDksImV4cCI6MjA4ODkyNzgwOX0.Y0p1mWxvuenXjyaF8jlJvyc5RKadh0LnAoQYCiDiDos'
+    );
+
     // Auth session — update nav to reflect logged-in state
-    (function initAuthNav() {
-      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
+    (async function initAuthNav() {
+      const { data: { session } } = await sb.auth.getSession();
       const authItem = document.getElementById('authNavItem');
-      if (s && s.expires > Date.now()) {
+      if (session) {
+        const meta = session.user.user_metadata;
+        const name = ((meta.first_name || '') + ' ' + (meta.last_name || '')).trim();
         authItem.innerHTML =
           '<div class="nav-user">' +
-            '<span class="nav-user-name">' + s.firstName + ' ' + s.lastName + '</span>' +
+            '<span class="nav-user-name">' + name + '</span>' +
             '<button class="nav-logout" id="logoutBtn">Sign out</button>' +
           '</div>';
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-          localStorage.removeItem('balhance_session');
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+          await sb.auth.signOut();
           window.location.reload();
         });
       }
