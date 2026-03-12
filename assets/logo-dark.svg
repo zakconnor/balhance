@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-label="Balhance Advisory &amp; Consulting">
+  <defs>
+    <!-- Shield outline used as clip region -->
+    <clipPath id="sc-d">
+      <path d="M38,93 Q4,76 4,54 L4,9 Q4,3 10,3 L66,3 Q72,3 72,9 L72,54 Q72,76 38,93 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Shield quadrant fills (clipped to shield shape) -->
+  <!-- Top-left: crimson -->
+  <rect x="4"  y="3"  width="34" height="47" fill="#8B1A2F" clip-path="url(#sc-d)"/>
+  <!-- Bottom-left: cream/ivory -->
+  <rect x="4"  y="50" width="34" height="47" fill="#F5F0DC" clip-path="url(#sc-d)"/>
+  <!-- Right half: navy -->
+  <rect x="38" y="3"  width="34" height="94" fill="#1a3258" clip-path="url(#sc-d)"/>
+
+  <!-- Inner dividers (gold lines, clipped) -->
+  <!-- Vertical centre -->
+  <line x1="38" y1="3" x2="38" y2="93" stroke="#C9A84C" stroke-width="1.8" clip-path="url(#sc-d)"/>
+  <!-- Horizontal (left half only) -->
+  <line x1="4" y1="50" x2="38" y2="50" stroke="#C9A84C" stroke-width="1.8" clip-path="url(#sc-d)"/>
+
+  <!-- Shield border -->
+  <path d="M38,93 Q4,76 4,54 L4,9 Q4,3 10,3 L66,3 Q72,3 72,9 L72,54 Q72,76 38,93 Z"
+        fill="none" stroke="#C9A84C" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- BALHANCE wordmark — white for dark backgrounds -->
+  <text x="92" y="54"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="44" font-weight="700"
+        fill="#ffffff"
+        letter-spacing="6">BALHANCE</text>
+
+  <!-- Gold separator line -->
+  <line x1="92" y1="63" x2="418" y2="63" stroke="#C9A84C" stroke-width="1.4"/>
+
+  <!-- Advisory & Consulting — italic script, gold -->
+  <text x="95" y="85"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="21" font-style="italic"
+        fill="#C9A84C">Advisory &amp; Consulting</text>
+</svg>

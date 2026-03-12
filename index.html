@@ -82,25 +82,12 @@
 
     .nav-logo {
       display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
+      align-items: center;
     }
-    .nav-logo-word {
-      font-family: var(--serif);
-      font-size: 1.55rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #fff;
-    }
-    .nav-logo-word span { color: var(--gold-light); }
-    .nav-logo-tag {
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-400);
-      padding-bottom: 1px;
+    .nav-logo img {
+      height: 42px;
+      width: auto;
+      display: block;
     }
 
     .nav-links {
@@ -199,6 +186,12 @@
       position: relative;
       z-index: 2;
       max-width: 680px;
+    }
+    .hero-logo {
+      display: block;
+      height: 64px;
+      width: auto;
+      margin-bottom: 2.5rem;
     }
 
     .hero-eyebrow {
@@ -797,28 +790,25 @@
     /* Coaching visual */
     .coaching-visual {
       position: relative;
+      padding-bottom: 3.5rem; /* space for accent block overflow */
     }
     .coaching-card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       position: relative;
-      height: 400px;
-      overflow: visible;
     }
     .c-card {
-      position: absolute;
       background: var(--navy);
       border-radius: 3px;
       padding: 2rem;
     }
     .c-card-1 {
-      bottom: 0; left: 0; right: 4rem;
       background: var(--navy-mid);
       padding: 1.75rem;
     }
     .c-card-2 {
-      top: 0; left: 3rem; right: 0;
-      bottom: 2rem;
       background: var(--navy);
-      z-index: 2;
     }
 
     .c-card-label {
@@ -862,14 +852,14 @@
 
     .coaching-accent-block {
       position: absolute;
-      bottom: -2rem;
-      right: -2rem;
+      bottom: 0;
+      right: 0;
+      width: 175px;
       background: var(--crimson);
       color: #fff;
       padding: 1.5rem;
       z-index: 3;
       border-radius: 2px;
-      max-width: 180px;
     }
     .cab-num {
       font-family: var(--serif);
@@ -1121,21 +1111,10 @@
       margin-bottom: 2rem;
     }
 
-    .footer-brand-name {
-      font-family: var(--serif);
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #fff;
-      margin-bottom: 0.3rem;
-    }
-    .footer-brand-name span { color: var(--gold-light); }
-    .footer-brand-tag {
-      font-family: var(--sans);
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gray-400);
+    .footer-brand-logo {
+      display: block;
+      height: 52px;
+      width: auto;
       margin-bottom: 1rem;
     }
     .footer-brand-desc {
@@ -1244,8 +1223,7 @@
   <nav id="nav">
     <div class="container nav-inner">
       <a href="#hero" class="nav-logo">
-        <span class="nav-logo-word">Bal<span>hance</span></span>
-        <span class="nav-logo-tag">Well-Being Advisory</span>
+        <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" />
       </a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -1270,6 +1248,7 @@
     <div class="hero-lines"></div>
     <div class="container">
       <div class="hero-content">
+        <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" class="hero-logo" />
         <p class="hero-eyebrow">Employee Well-Being Research &amp; Advisory</p>
         <h1 class="hero-headline">
           The science of <em>balance</em>&nbsp;—<br>
@@ -1606,11 +1585,11 @@
                 <li>Measurable behavioral outcomes</li>
               </ul>
             </div>
-            <div class="coaching-accent-block">
-              <div class="cab-num">87%</div>
-              <div class="cab-text">of coached leaders report improved team climate within 6 months</div>
-            </div>
           </div><!-- /.coaching-card-stack -->
+          <div class="coaching-accent-block">
+            <div class="cab-num">87%</div>
+            <div class="cab-text">of coached leaders report improved team climate within 6 months</div>
+          </div>
         </div><!-- /.coaching-visual -->
 
       </div><!-- /.coaching-inner -->
@@ -1755,8 +1734,7 @@
     <div class="container">
       <div class="footer-top">
         <div>
-          <div class="footer-brand-name">Bal<span>hance</span></div>
-          <div class="footer-brand-tag">Well-Being Research &amp; Advisory</div>
+          <img src="assets/logo-dark.svg" alt="Balhance Advisory &amp; Consulting" class="footer-brand-logo" />
           <p class="footer-brand-desc">
             Helping organizations cultivate the conditions for sustainable human performance through research, advisory, and leadership coaching.
           </p>
