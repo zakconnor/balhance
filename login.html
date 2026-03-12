@@ -380,38 +380,18 @@
 
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    /* ── Shared auth utilities ── */
-    async function hashPassword(pw) {
-      const buf = await crypto.subtle.digest(
-        'SHA-256',
-        new TextEncoder().encode(pw + ':balhance-v1')
-      );
-      return Array.from(new Uint8Array(buf))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-    }
-
-    function getUsers() {
-      return JSON.parse(localStorage.getItem('balhance_users') || '[]');
-    }
-
-    function setSession(user) {
-      localStorage.setItem('balhance_session', JSON.stringify({
-        userId:    user.id,
-        email:     user.email,
-        firstName: user.firstName,
-        lastName:  user.lastName,
-        company:   user.company,
-        title:     user.title,
-        expires:   Date.now() + 7 * 24 * 60 * 60 * 1000
-      }));
-    }
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://uyucyxbytvtdbrxrjeak.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dWN5eGJ5dHZ0ZGJyeHJqZWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTE4MDksImV4cCI6MjA4ODkyNzgwOX0.Y0p1mWxvuenXjyaF8jlJvyc5RKadh0LnAoQYCiDiDos'
+    );
 
     /* ── Redirect if already logged in ── */
-    (function checkSession() {
-      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
-      if (s && s.expires > Date.now()) window.location.href = 'index.html';
+    (async function checkSession() {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) window.location.href = 'index.html';
     })();
 
     /* ── Show post-registration success banner ── */
@@ -456,27 +436,17 @@
       submitBtn.disabled    = true;
       submitBtn.textContent = 'Signing in…';
 
-      try {
-        const hash  = await hashPassword(pw);
-        const users = getUsers();
-        const user  = users.find(
-          u => u.email.toLowerCase() === email.toLowerCase() && u.password === hash
-        );
+      const { error } = await sb.auth.signInWithPassword({ email, password: pw });
 
-        if (user) {
-          setSession(user);
-          window.location.href = 'index.html';
-        } else {
-          alertEl.textContent = 'Incorrect email or password. Please try again.';
-          alertEl.className   = 'alert alert-error visible';
-          submitBtn.disabled    = false;
-          submitBtn.textContent = 'Sign In';
-        }
-      } catch {
-        alertEl.textContent = 'Something went wrong. Please try again.';
+      if (error) {
+        alertEl.textContent = error.message === 'Invalid login credentials'
+          ? 'Incorrect email or password. Please try again.'
+          : error.message;
         alertEl.className   = 'alert alert-error visible';
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Sign In';
+      } else {
+        window.location.href = 'index.html';
       }
     });
   </script>

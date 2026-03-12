@@ -424,47 +424,31 @@
 
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    /* ── Shared auth utilities ── */
-    async function hashPassword(pw) {
-      const buf = await crypto.subtle.digest(
-        'SHA-256',
-        new TextEncoder().encode(pw + ':balhance-v1')
-      );
-      return Array.from(new Uint8Array(buf))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
-    }
-
-    function getUsers() {
-      return JSON.parse(localStorage.getItem('balhance_users') || '[]');
-    }
-
-    function saveUsers(users) {
-      localStorage.setItem('balhance_users', JSON.stringify(users));
-    }
-
-    function generateId() {
-      return Date.now().toString(36) + Math.random().toString(36).slice(2);
-    }
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://uyucyxbytvtdbrxrjeak.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dWN5eGJ5dHZ0ZGJyeHJqZWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTE4MDksImV4cCI6MjA4ODkyNzgwOX0.Y0p1mWxvuenXjyaF8jlJvyc5RKadh0LnAoQYCiDiDos'
+    );
 
     /* ── Redirect if already logged in ── */
-    (function checkSession() {
-      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
-      if (s && s.expires > Date.now()) window.location.href = 'index.html';
+    (async function checkSession() {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) window.location.href = 'index.html';
     })();
 
     /* ── Form elements ── */
-    const form             = document.getElementById('registerForm');
-    const firstNameEl      = document.getElementById('firstName');
-    const lastNameEl       = document.getElementById('lastName');
-    const companyEl        = document.getElementById('company');
-    const titleEl          = document.getElementById('title');
-    const emailEl          = document.getElementById('email');
-    const passwordEl       = document.getElementById('password');
-    const confirmPasswordEl= document.getElementById('confirmPassword');
-    const submitBtn        = document.getElementById('submitBtn');
-    const alertEl          = document.getElementById('globalAlert');
+    const form              = document.getElementById('registerForm');
+    const firstNameEl       = document.getElementById('firstName');
+    const lastNameEl        = document.getElementById('lastName');
+    const companyEl         = document.getElementById('company');
+    const titleEl           = document.getElementById('title');
+    const emailEl           = document.getElementById('email');
+    const passwordEl        = document.getElementById('password');
+    const confirmPasswordEl = document.getElementById('confirmPassword');
+    const submitBtn         = document.getElementById('submitBtn');
+    const alertEl           = document.getElementById('globalAlert');
 
     function setError(input, msgId, show) {
       input.classList.toggle('field-error', show);
@@ -510,40 +494,34 @@
       submitBtn.disabled    = true;
       submitBtn.textContent = 'Creating account…';
 
-      try {
-        const users = getUsers();
-        const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
-
-        if (exists) {
-          alertEl.textContent = 'An account with that email address already exists. Please sign in.';
-          alertEl.className   = 'alert alert-error visible';
-          submitBtn.disabled    = false;
-          submitBtn.textContent = 'Create Account';
-          return;
+      const { data, error: signUpError } = await sb.auth.signUp({
+        email,
+        password: pw,
+        options: {
+          data: { first_name: firstName, last_name: lastName, company, title }
         }
+      });
 
-        const hash = await hashPassword(pw);
-        const newUser = {
-          id:        generateId(),
-          firstName,
-          lastName,
-          email,
-          company,
-          title,
-          password:  hash,
-          createdAt: Date.now()
-        };
-
-        users.push(newUser);
-        saveUsers(users);
-
-        window.location.href = 'login.html?registered=1';
-      } catch {
-        alertEl.textContent = 'Something went wrong. Please try again.';
+      if (signUpError) {
+        alertEl.textContent = signUpError.message;
         alertEl.className   = 'alert alert-error visible';
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Create Account';
+        return;
       }
+
+      // Insert extended profile into the profiles table
+      if (data.user) {
+        await sb.from('profiles').insert({
+          id:         data.user.id,
+          first_name: firstName,
+          last_name:  lastName,
+          company,
+          title
+        });
+      }
+
+      window.location.href = 'login.html?registered=1';
     });
   </script>
 
