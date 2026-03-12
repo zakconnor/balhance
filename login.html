@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Balhance</title>
+  <meta name="description" content="Sign in to your Balhance client portal." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #1D4028;
+      --navy-mid:  #284E30;
+      --amber:     #A85F10;
+      --surface:   #F0EDE7;
+      --line:      #D2CFC8;
+      --gray-500:  #6B6860;
+      --gray-700:  #37342D;
+      --ink:       #0C0C0A;
+      --red:       #B83040;
+      --serif:     'EB Garamond', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---- Two-column shell ---- */
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+    }
+
+    /* ---- Left brand panel ---- */
+    .auth-brand {
+      background: var(--navy);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-brand::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .auth-brand::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -60px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-body {
+      position: relative;
+      z-index: 1;
+    }
+    .brand-rule {
+      width: 32px; height: 2px;
+      background: var(--amber);
+      margin-bottom: 1.75rem;
+    }
+    .brand-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+    }
+    .brand-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    .brand-stat {
+      position: relative;
+      z-index: 1;
+    }
+    .brand-stat-num {
+      font-family: var(--serif);
+      font-size: 3.25rem;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .brand-stat-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* ---- Right form panel ---- */
+    .auth-panel {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .auth-inner {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .auth-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .auth-eyebrow::before {
+      content: '';
+      display: block;
+      width: 16px; height: 1px;
+      background: var(--navy);
+    }
+    .auth-title {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      line-height: 1.15;
+    }
+    .auth-sub {
+      font-size: 0.88rem;
+      color: var(--gray-500);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Alert banners ---- */
+    .alert {
+      padding: 0.9rem 1.1rem;
+      font-size: 0.83rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      border-left: 2px solid;
+      display: none;
+    }
+    .alert.visible { display: block; }
+    .alert-error {
+      background: #FEF2F3;
+      border-color: var(--red);
+      color: #8C2030;
+    }
+    .alert-success {
+      background: #F0F7F3;
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    /* ---- Form fields ---- */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .label-link {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: var(--line);
+      transition: color 0.2s;
+    }
+    .label-link:hover { color: var(--navy); }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 0.82rem 1rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input:focus {
+      border-color: var(--navy);
+      background: #fff;
+    }
+    input.field-error {
+      border-color: var(--red);
+    }
+
+    .error-msg {
+      font-size: 0.72rem;
+      color: var(--red);
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    /* ---- Submit button ---- */
+    .btn-submit {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      padding: 1.05rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--navy-mid); }
+    .btn-submit:disabled { opacity: 0.6; cursor: default; }
+
+    /* ---- Divider ---- */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.75rem 0;
+    }
+    .or-divider::before, .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .or-divider span {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--gray-500);
+    }
+
+    /* ---- Footer link ---- */
+    .auth-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+    .auth-footer a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(29,64,40,0.3);
+    }
+    .auth-footer a:hover {
+      text-decoration-color: var(--navy);
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 760px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-brand { display: none; }
+      .auth-panel {
+        align-items: flex-start;
+        padding: 3.5rem 1.5rem;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- ── Left: Brand Panel ── -->
+    <div class="auth-brand">
+      <a href="index.html" class="brand-logo">Balhance</a>
+
+      <div class="brand-body">
+        <div class="brand-rule"></div>
+        <p class="brand-headline">The science of balance — the art of lasting change.</p>
+        <p class="brand-desc">
+          Access your research findings, advisory materials, and program
+          resources through your Balhance client portal.
+        </p>
+      </div>
+
+      <div class="brand-stat">
+        <div class="brand-stat-num">94%</div>
+        <div class="brand-stat-label">Client retention rate</div>
+      </div>
+    </div>
+
+    <!-- ── Right: Form Panel ── -->
+    <div class="auth-panel">
+      <div class="auth-inner">
+
+        <p class="auth-eyebrow">Client Portal</p>
+        <h1 class="auth-title">Welcome back.</h1>
+        <p class="auth-sub">Sign in to access your Balhance account.</p>
+
+        <div class="alert" id="globalAlert"></div>
+
+        <form id="loginForm" novalidate>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"
+              placeholder="you@company.com"
+              autocomplete="email" />
+            <span class="error-msg" id="emailErr">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="password">Password</label>
+              <a href="#" class="label-link">Forgot password?</a>
+            </div>
+            <input type="password" id="password" name="password"
+              placeholder="••••••••"
+              autocomplete="current-password" />
+            <span class="error-msg" id="passwordErr">Please enter your password.</span>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Sign In</button>
+
+        </form>
+
+        <div class="or-divider"><span>or</span></div>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="register.html">Create one</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ── Shared auth utilities ── */
+    async function hashPassword(pw) {
+      const buf = await crypto.subtle.digest(
+        'SHA-256',
+        new TextEncoder().encode(pw + ':balhance-v1')
+      );
+      return Array.from(new Uint8Array(buf))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('balhance_users') || '[]');
+    }
+
+    function setSession(user) {
+      localStorage.setItem('balhance_session', JSON.stringify({
+        userId:    user.id,
+        email:     user.email,
+        firstName: user.firstName,
+        lastName:  user.lastName,
+        company:   user.company,
+        title:     user.title,
+        expires:   Date.now() + 7 * 24 * 60 * 60 * 1000
+      }));
+    }
+
+    /* ── Redirect if already logged in ── */
+    (function checkSession() {
+      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
+      if (s && s.expires > Date.now()) window.location.href = 'index.html';
+    })();
+
+    /* ── Show post-registration success banner ── */
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('registered') === '1') {
+      const el = document.getElementById('globalAlert');
+      el.textContent = 'Account created successfully. Please sign in below.';
+      el.className = 'alert alert-success visible';
+    }
+
+    /* ── Form handling ── */
+    const form       = document.getElementById('loginForm');
+    const emailEl    = document.getElementById('email');
+    const passwordEl = document.getElementById('password');
+    const submitBtn  = document.getElementById('submitBtn');
+    const alertEl    = document.getElementById('globalAlert');
+
+    function setError(input, msgId, show) {
+      input.classList.toggle('field-error', show);
+      document.getElementById(msgId).classList.toggle('visible', show);
+    }
+
+    emailEl.addEventListener('input',    () => setError(emailEl,    'emailErr',    false));
+    passwordEl.addEventListener('input', () => setError(passwordEl, 'passwordErr', false));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertEl.className = 'alert';
+
+      const email = emailEl.value.trim();
+      const pw    = passwordEl.value;
+      let ok = true;
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError(emailEl, 'emailErr', true); ok = false;
+      }
+      if (!pw) {
+        setError(passwordEl, 'passwordErr', true); ok = false;
+      }
+      if (!ok) return;
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Signing in…';
+
+      try {
+        const hash  = await hashPassword(pw);
+        const users = getUsers();
+        const user  = users.find(
+          u => u.email.toLowerCase() === email.toLowerCase() && u.password === hash
+        );
+
+        if (user) {
+          setSession(user);
+          window.location.href = 'index.html';
+        } else {
+          alertEl.textContent = 'Incorrect email or password. Please try again.';
+          alertEl.className   = 'alert alert-error visible';
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Sign In';
+        }
+      } catch {
+        alertEl.textContent = 'Something went wrong. Please try again.';
+        alertEl.className   = 'alert alert-error visible';
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Sign In';
+      }
+    });
+  </script>
+
+</body>
+</html>

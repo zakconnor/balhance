@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — Balhance</title>
+  <meta name="description" content="Create your Balhance client portal account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #1D4028;
+      --navy-mid:  #284E30;
+      --amber:     #A85F10;
+      --surface:   #F0EDE7;
+      --line:      #D2CFC8;
+      --gray-500:  #6B6860;
+      --gray-700:  #37342D;
+      --ink:       #0C0C0A;
+      --red:       #B83040;
+      --serif:     'EB Garamond', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---- Two-column shell ---- */
+    .auth-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+    }
+
+    /* ---- Left brand panel ---- */
+    .auth-brand {
+      background: var(--navy);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-brand::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .auth-brand::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: -60px;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-body {
+      position: relative;
+      z-index: 1;
+    }
+    .brand-rule {
+      width: 32px; height: 2px;
+      background: var(--amber);
+      margin-bottom: 1.75rem;
+    }
+    .brand-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 1.25rem;
+    }
+    .brand-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+
+    .brand-steps {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .brand-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+    .brand-step-num {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--amber);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .brand-step-text {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* ---- Right form panel ---- */
+    .auth-panel {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+    .auth-inner {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .auth-eyebrow {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .auth-eyebrow::before {
+      content: '';
+      display: block;
+      width: 16px; height: 1px;
+      background: var(--navy);
+    }
+    .auth-title {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      line-height: 1.15;
+    }
+    .auth-sub {
+      font-size: 0.88rem;
+      color: var(--gray-500);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Alert banners ---- */
+    .alert {
+      padding: 0.9rem 1.1rem;
+      font-size: 0.83rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      border-left: 2px solid;
+      display: none;
+    }
+    .alert.visible { display: block; }
+    .alert-error {
+      background: #FEF2F3;
+      border-color: var(--red);
+      color: #8C2030;
+    }
+
+    /* ---- Form row (two columns) ---- */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    /* ---- Form fields ---- */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 0.82rem 1rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input:focus {
+      border-color: var(--navy);
+      background: #fff;
+    }
+    input.field-error {
+      border-color: var(--red);
+    }
+
+    .error-msg {
+      font-size: 0.72rem;
+      color: var(--red);
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    /* ---- Section divider ---- */
+    .form-section {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin: 1.4rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* ---- Submit button ---- */
+    .btn-submit {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      padding: 1.05rem;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--navy-mid); }
+    .btn-submit:disabled { opacity: 0.6; cursor: default; }
+
+    /* ---- Footer link ---- */
+    .auth-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-top: 1.75rem;
+    }
+    .auth-footer a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(29,64,40,0.3);
+    }
+    .auth-footer a:hover {
+      text-decoration-color: var(--navy);
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 760px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-brand { display: none; }
+      .auth-panel {
+        align-items: flex-start;
+        padding: 3.5rem 1.5rem;
+        min-height: 100vh;
+      }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- ── Left: Brand Panel ── -->
+    <div class="auth-brand">
+      <a href="index.html" class="brand-logo">Balhance</a>
+
+      <div class="brand-body">
+        <div class="brand-rule"></div>
+        <p class="brand-headline">Begin your journey toward lasting organisational balance.</p>
+        <p class="brand-desc">
+          Your client portal gives you secure access to research findings,
+          advisory materials, and programme resources tailored to your engagement.
+        </p>
+      </div>
+
+      <div class="brand-steps">
+        <div class="brand-step">
+          <span class="brand-step-num">01</span>
+          <span class="brand-step-text">Create your account with your professional details</span>
+        </div>
+        <div class="brand-step">
+          <span class="brand-step-num">02</span>
+          <span class="brand-step-text">Sign in to access your personalised portal</span>
+        </div>
+        <div class="brand-step">
+          <span class="brand-step-num">03</span>
+          <span class="brand-step-text">Engage with your advisory team and programme content</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Right: Form Panel ── -->
+    <div class="auth-panel">
+      <div class="auth-inner">
+
+        <p class="auth-eyebrow">Client Portal</p>
+        <h1 class="auth-title">Create account.</h1>
+        <p class="auth-sub">Set up your Balhance client account to get started.</p>
+
+        <div class="alert" id="globalAlert"></div>
+
+        <form id="registerForm" novalidate>
+
+          <div class="form-section">Personal Information</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName"
+                placeholder="Jane"
+                autocomplete="given-name" />
+              <span class="error-msg" id="firstNameErr">Please enter your first name.</span>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName"
+                placeholder="Smith"
+                autocomplete="family-name" />
+              <span class="error-msg" id="lastNameErr">Please enter your last name.</span>
+            </div>
+          </div>
+
+          <div class="form-section">Professional Details</div>
+
+          <div class="form-group">
+            <label for="company">Company Name</label>
+            <input type="text" id="company" name="company"
+              placeholder="Acme Corporation"
+              autocomplete="organization" />
+            <span class="error-msg" id="companyErr">Please enter your company name.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title"
+              placeholder="Chief Executive Officer"
+              autocomplete="organization-title" />
+            <span class="error-msg" id="titleErr">Please enter your title.</span>
+          </div>
+
+          <div class="form-section">Account Credentials</div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email"
+              placeholder="you@company.com"
+              autocomplete="email" />
+            <span class="error-msg" id="emailErr">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password"
+                placeholder="Min. 8 characters"
+                autocomplete="new-password" />
+              <span class="error-msg" id="passwordErr">Password must be at least 8 characters.</span>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword"
+                placeholder="Repeat password"
+                autocomplete="new-password" />
+              <span class="error-msg" id="confirmPasswordErr">Passwords do not match.</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Create Account</button>
+
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Sign in</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* ── Shared auth utilities ── */
+    async function hashPassword(pw) {
+      const buf = await crypto.subtle.digest(
+        'SHA-256',
+        new TextEncoder().encode(pw + ':balhance-v1')
+      );
+      return Array.from(new Uint8Array(buf))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('balhance_users') || '[]');
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('balhance_users', JSON.stringify(users));
+    }
+
+    function generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2);
+    }
+
+    /* ── Redirect if already logged in ── */
+    (function checkSession() {
+      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
+      if (s && s.expires > Date.now()) window.location.href = 'index.html';
+    })();
+
+    /* ── Form elements ── */
+    const form             = document.getElementById('registerForm');
+    const firstNameEl      = document.getElementById('firstName');
+    const lastNameEl       = document.getElementById('lastName');
+    const companyEl        = document.getElementById('company');
+    const titleEl          = document.getElementById('title');
+    const emailEl          = document.getElementById('email');
+    const passwordEl       = document.getElementById('password');
+    const confirmPasswordEl= document.getElementById('confirmPassword');
+    const submitBtn        = document.getElementById('submitBtn');
+    const alertEl          = document.getElementById('globalAlert');
+
+    function setError(input, msgId, show) {
+      input.classList.toggle('field-error', show);
+      document.getElementById(msgId).classList.toggle('visible', show);
+    }
+
+    /* ── Clear errors on input ── */
+    firstNameEl.addEventListener('input',       () => setError(firstNameEl,       'firstNameErr',       false));
+    lastNameEl.addEventListener('input',        () => setError(lastNameEl,        'lastNameErr',        false));
+    companyEl.addEventListener('input',         () => setError(companyEl,         'companyErr',         false));
+    titleEl.addEventListener('input',           () => setError(titleEl,           'titleErr',           false));
+    emailEl.addEventListener('input',           () => setError(emailEl,           'emailErr',           false));
+    passwordEl.addEventListener('input',        () => setError(passwordEl,        'passwordErr',        false));
+    confirmPasswordEl.addEventListener('input', () => setError(confirmPasswordEl, 'confirmPasswordErr', false));
+
+    /* ── Submit ── */
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertEl.className = 'alert';
+
+      const firstName = firstNameEl.value.trim();
+      const lastName  = lastNameEl.value.trim();
+      const company   = companyEl.value.trim();
+      const title     = titleEl.value.trim();
+      const email     = emailEl.value.trim();
+      const pw        = passwordEl.value;
+      const pwConfirm = confirmPasswordEl.value;
+
+      let ok = true;
+
+      if (!firstName) { setError(firstNameEl, 'firstNameErr', true); ok = false; }
+      if (!lastName)  { setError(lastNameEl,  'lastNameErr',  true); ok = false; }
+      if (!company)   { setError(companyEl,   'companyErr',   true); ok = false; }
+      if (!title)     { setError(titleEl,     'titleErr',     true); ok = false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError(emailEl, 'emailErr', true); ok = false;
+      }
+      if (!pw || pw.length < 8) { setError(passwordEl, 'passwordErr', true); ok = false; }
+      if (pw !== pwConfirm)     { setError(confirmPasswordEl, 'confirmPasswordErr', true); ok = false; }
+
+      if (!ok) return;
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Creating account…';
+
+      try {
+        const users = getUsers();
+        const exists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
+
+        if (exists) {
+          alertEl.textContent = 'An account with that email address already exists. Please sign in.';
+          alertEl.className   = 'alert alert-error visible';
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Create Account';
+          return;
+        }
+
+        const hash = await hashPassword(pw);
+        const newUser = {
+          id:        generateId(),
+          firstName,
+          lastName,
+          email,
+          company,
+          title,
+          password:  hash,
+          createdAt: Date.now()
+        };
+
+        users.push(newUser);
+        saveUsers(users);
+
+        window.location.href = 'login.html?registered=1';
+      } catch {
+        alertEl.textContent = 'Something went wrong. Please try again.';
+        alertEl.className   = 'alert alert-error visible';
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    });
+  </script>
+
+</body>
+</html>

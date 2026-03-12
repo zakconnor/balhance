@@ -120,6 +120,48 @@
     }
     .nav-cta:hover { background: var(--navy-mid) !important; color: #fff !important; }
 
+    .nav-auth-link {
+      font-size: 0.72rem !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: var(--navy) !important;
+      border: 1px solid var(--navy);
+      padding: 0.5rem 1.25rem;
+      transition: background 0.2s, color 0.2s !important;
+    }
+    .nav-auth-link:hover {
+      background: var(--navy) !important;
+      color: #fff !important;
+    }
+
+    /* Logged-in state: user greeting + logout */
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+    }
+    .nav-user-name {
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    .nav-logout {
+      font-size: 0.72rem !important;
+      font-weight: 500 !important;
+      color: var(--gray-500) !important;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: var(--line);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--sans);
+      transition: color 0.2s !important;
+    }
+    .nav-logout:hover { color: var(--navy) !important; }
+
     .nav-toggle {
       display: none;
       flex-direction: column;
@@ -1116,6 +1158,7 @@
         <li><a href="#approach">Approach</a></li>
         <li><a href="#coaching">Coaching</a></li>
         <li><a href="#contact" class="nav-cta">Contact</a></li>
+        <li id="authNavItem"><a href="login.html" class="nav-auth-link">Sign In</a></li>
       </ul>
     </div>
   </nav>
@@ -1626,6 +1669,23 @@
        SCRIPTS
   ================================================================ -->
   <script>
+    // Auth session — update nav to reflect logged-in state
+    (function initAuthNav() {
+      const s = JSON.parse(localStorage.getItem('balhance_session') || 'null');
+      const authItem = document.getElementById('authNavItem');
+      if (s && s.expires > Date.now()) {
+        authItem.innerHTML =
+          '<div class="nav-user">' +
+            '<span class="nav-user-name">' + s.firstName + ' ' + s.lastName + '</span>' +
+            '<button class="nav-logout" id="logoutBtn">Sign out</button>' +
+          '</div>';
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+          localStorage.removeItem('balhance_session');
+          window.location.reload();
+        });
+      }
+    })();
+
     // Nav scroll state
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
