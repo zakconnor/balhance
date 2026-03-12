@@ -1180,16 +1180,42 @@
       .testimonial-inner { grid-template-columns: 1fr; }
       .testimonial-side { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 2rem; }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      .coaching-card-stack { height: 300px; }
       .mission-badge { display: none; }
+
+      /* Mission: tighten frame padding at tablet */
+      .mission-frame-inner { padding: 2rem; }
+      .mission-quote { font-size: 1.05rem; }
+
+      /* Coaching: reflow accent block below cards instead of overlapping */
+      .coaching-visual { padding-bottom: 0; }
+      .coaching-accent-block {
+        position: static;
+        width: 100%;
+        margin-top: 1rem;
+        border-radius: 2px;
+      }
     }
 
     @media (max-width: 560px) {
+      :root { --section-gap: 4rem; }
+
       .stats-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .testimonial-outcomes { grid-template-columns: 1fr; }
       .mission-pillars { grid-template-columns: 1fr; }
+
+      /* Mission: compact frame for small screens */
+      .mission-frame-inner { padding: 1.25rem; }
+      .mission-quote { font-size: 0.95rem; }
+      .mission-icon { width: 60px; height: 60px; margin-bottom: 1rem; }
+      .mission-icon svg { width: 28px; height: 28px; }
+
+      /* Coaching: tighten card padding and feature items */
+      .c-card { padding: 1.5rem; }
+      .c-card-1 { padding: 1.25rem; }
+      .coaching-features { gap: 1rem; }
+      .coaching-feature { gap: 0.75rem; }
     }
   </style>
 </head>
