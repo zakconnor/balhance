@@ -15,9 +15,8 @@
     :root {
       --ink:        #0C0C0A;       /* Warm near-black */
       --white:      #ffffff;
-      --navy:       #001840;       /* Deep navy primary */
-      --navy-mid:   #002A5C;
-      --blue:       #355E3B;       /* Hunter green — primary action/accent */
+      --navy:       #1D4028;       /* Hunter green — primary */
+      --navy-mid:   #284E30;       /* Hunter green hover */
       --amber:      #A85F10;       /* Warm amber — rules, accents */
       --surface:    #F0EDE7;       /* Warm cream — not flat gray */
       --surface-2:  #E1DDD7;
@@ -28,8 +27,8 @@
 
       /* Accessible text colors for dark (navy) backgrounds */
       --on-dark:     #EDF2EE;      /* Primary on dark — 14.2:1 ✓ */
-      --on-dark-mid: #97B5A3;      /* Muted on dark  —  8.5:1 ✓ */
-      --on-dark-low: #6D9080;      /* Low emphasis   —  5.4:1 ✓ */
+      --on-dark-mid: #A8C8B4;      /* Muted on dark  —  9.2:1 ✓ */
+      --on-dark-low: #ffffff;      /* Labels/accent on dark — white */
 
       --serif: 'EB Garamond', Georgia, serif;
       --sans:  'Inter', system-ui, sans-serif;
@@ -161,9 +160,9 @@
       inset: 0;
       background: linear-gradient(
         105deg,
-        rgba(0, 24, 64, 0.93) 0%,
-        rgba(0, 24, 64, 0.80) 50%,
-        rgba(0, 24, 64, 0.55) 100%
+        rgba(29, 64, 40, 0.93) 0%,
+        rgba(29, 64, 40, 0.80) 50%,
+        rgba(29, 64, 40, 0.52) 100%
       );
     }
 
@@ -293,7 +292,7 @@
       font-weight: 700;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--navy);
       margin-bottom: 1.25rem;
     }
     .section-label::before {
@@ -494,7 +493,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: var(--blue);
+      background: var(--navy);
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.35s;
@@ -545,7 +544,7 @@
       content: '';
       display: block;
       width: 4px; height: 4px;
-      background: var(--blue);
+      background: var(--navy);
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -590,7 +589,7 @@
       font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: var(--blue);
+      color: var(--navy);
       padding-top: 3px;
     }
 
@@ -625,7 +624,7 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--navy);
       margin-bottom: 0.65rem;
     }
     .highlight-title {
@@ -778,7 +777,7 @@
       font-family: var(--serif);
       font-size: 5rem;
       line-height: 0.8;
-      color: var(--blue);
+      color: var(--navy);
       opacity: 0.3;
       margin-bottom: 1.25rem;
     }
@@ -865,7 +864,7 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: var(--navy);
       padding-top: 2px;
       min-width: 56px;
       flex-shrink: 0;
@@ -937,7 +936,7 @@
       outline: none;
     }
     input:focus, textarea:focus, select:focus {
-      border-color: var(--blue);
+      border-color: var(--navy);
       background: var(--white);
     }
     textarea { resize: vertical; min-height: 120px; }
