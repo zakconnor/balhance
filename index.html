@@ -192,28 +192,40 @@
     }
 
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('assets/hero-bg.jpg');
-      background-size: cover;
-      background-position: center 30%;
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        105deg,
-        rgba(29, 64, 40, 0.93) 0%,
-        rgba(29, 64, 40, 0.80) 50%,
-        rgba(29, 64, 40, 0.52) 100%
-      );
-    }
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  filter: grayscale(100%);
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(29, 64, 40, 0.95) 0%,
+    rgba(29, 64, 40, 0.92) 50%,
+    rgba(29, 64, 40, 0.85) 65%,
+    rgba(29, 64, 40, 0.65) 75%,
+    rgba(29, 64, 40, 0.35) 85%,
+    rgba(29, 64, 40, 0) 100%
+  );
+}
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 720px;
+      max-width: 1200px;
       padding-top: 64px;
     }
 
@@ -1228,7 +1240,7 @@
       <div class="hero-content">
         <p class="hero-tag">Employee Well-Being Research &amp; Advisory</p>
         <h1 class="hero-headline">
-          The science of <em>balance</em>&nbsp;—<br>
+          The science of <em>balhance</em>&nbsp;—<br>
           the art of lasting&nbsp;change.
         </h1>
         <p class="hero-sub">
@@ -1256,20 +1268,20 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number">94%</div>
-          <div class="stat-label">Client Retention Rate</div>
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Years Leadership Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">$200K</div>
+          <div class="stat-label">AI Initiative Savings</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Change Initiatives Led</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">200+</div>
-          <div class="stat-label">Organizations Served</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">40+</div>
-          <div class="stat-label">Industries Researched</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">3×</div>
-          <div class="stat-label">Avg. Engagement Improvement</div>
+          <div class="stat-label">Research Articles Analyzed</div>
         </div>
       </div>
     </div>
@@ -1298,7 +1310,7 @@
           <h2 class="section-title">Advancing well-being as a strategic imperative.</h2>
           <div class="rule"></div>
           <p>
-            Balhance was founded on a simple but powerful conviction: organizations that invest in the whole person outperform those that do not. We translate that conviction into measurable outcomes — combining academic rigor with practical wisdom to help leadership teams build cultures where people genuinely flourish.
+            Balhance was founded on a simple but powerful conviction: organizations that invest in the whole person outperform those that do not. We translate that into measurable outcomes — combining academic rigor with practical wisdom to help leadership teams build cultures where people genuinely flourish.
           </p>
           <p>
             We are not a wellness vendor. We are a research-driven advisory practice that works closely with C-suite leaders and HR executives to diagnose the real drivers of imbalance, design evidence-based interventions, and sustain meaningful change over time.
@@ -1339,7 +1351,7 @@
           <div class="rule"></div>
         </div>
         <p class="section-lead">
-          Each engagement draws on all three of our core practices — research, advisory, and coaching — calibrated to the specific challenges and ambitions of your organization.
+          Each engagement draws on one of our three core practices — research, advisory, and coaching — calibrated to the specific challenges and ambitions of your organization.
         </p>
       </div>
 
@@ -1406,7 +1418,7 @@
           <div class="rule"></div>
         </div>
         <p class="section-lead">
-          Our methodology integrates decades of occupational health research with practical business advisory — delivering not just diagnoses, but durable organizational change.
+          Our methodology integrates thousands of hours of research with practical business advisory — delivering not just diagnoses, but lasting organizational change.
         </p>
       </div>
 
@@ -1452,8 +1464,8 @@
         <div class="approach-highlights">
           <div class="highlight-card">
             <div class="highlight-tag">Research Foundation</div>
-            <div class="highlight-title">Grounded in Occupational Health Psychology</div>
-            <div class="highlight-body">Our frameworks draw on established bodies of research including the Job Demands-Resources model, Self-Determination Theory, and the latest studies in workplace flourishing and sustainable performance.</div>
+            <div class="highlight-title">Grounded in the Rigor of Academic Research</div>
+            <div class="highlight-body">Our frameworks draw on established bodies of research, including the Job Demands-Resources model, Self-Determination Theory, and the latest studies in workplace flourishing and sustainable performance.</div>
           </div>
           <div class="highlight-card">
             <div class="highlight-tag">Advisory Practice</div>
@@ -1642,8 +1654,7 @@
             <div class="contact-detail">
               <div class="contact-detail-label">Location</div>
               <div class="contact-detail-text">
-                <strong>Location</strong>
-                New York, NY &mdash; Serving organizations globally
+                Philadelphia, PA &mdash; Serving organizations globally
               </div>
             </div>
           </div>
