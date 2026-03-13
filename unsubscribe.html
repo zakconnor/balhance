@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unsubscribe — Balhance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:      #0C0C0A;
+      --navy:     #1D4028;
+      --amber:    #A85F10;
+      --surface:  #F0EDE7;
+      --line:     #D2CFC8;
+      --gray-500: #6B6860;
+      --red:      #B83040;
+      --serif:    'EB Garamond', Georgia, serif;
+      --sans:     'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--sans);
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      max-width: 480px;
+      width: 100%;
+      padding: 3rem 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 2.5rem;
+      display: block;
+      text-decoration: none;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-pending { color: var(--gray-500); }
+    .icon-success { color: var(--navy); }
+    .icon-already { color: var(--gray-500); }
+    .icon-error   { color: var(--red); }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 0.88rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-home {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      transition: background 0.2s;
+    }
+    .btn-home:hover { background: #284E30; }
+
+    .resubscribe-link {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--sans);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .resubscribe-link:hover { color: var(--navy); }
+    .resubscribe-link { display: none; }
+    .resubscribe-link.visible { display: inline; }
+
+    #state-pending,
+    #state-success,
+    #state-already,
+    #state-error,
+    #state-invalid { display: none; }
+    #state-pending.visible,
+    #state-success.visible,
+    #state-already.visible,
+    #state-error.visible,
+    #state-invalid.visible { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <a href="index.html" class="brand">Balhance</a>
+
+    <!-- Pending -->
+    <div id="state-pending" class="visible">
+      <div class="icon icon-pending">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h1>One moment…</h1>
+      <p>We're processing your request.</p>
+    </div>
+
+    <!-- Success -->
+    <div id="state-success">
+      <div class="icon icon-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h1>You've been unsubscribed.</h1>
+      <p>You won't receive any more emails from Balhance. We're sorry to see you go.</p>
+      <a href="index.html" class="btn-home">Back to Balhance</a>
+      <br />
+      <button class="resubscribe-link visible" id="resubBtn">Changed your mind? Re-subscribe.</button>
+    </div>
+
+    <!-- Already unsubscribed -->
+    <div id="state-already">
+      <div class="icon icon-already">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h1>Already unsubscribed.</h1>
+      <p>This email address has already been removed from our list.</p>
+      <a href="index.html" class="btn-home">Back to Balhance</a>
+    </div>
+
+    <!-- Error -->
+    <div id="state-error">
+      <div class="icon icon-error">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <h1>Something went wrong.</h1>
+      <p>We couldn't process your request. Please try again or contact <a href="mailto:hello@balhance.com" style="color:var(--navy);">hello@balhance.com</a>.</p>
+      <a href="index.html" class="btn-home">Back to Balhance</a>
+    </div>
+
+    <!-- Invalid / missing token -->
+    <div id="state-invalid">
+      <div class="icon icon-error">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <h1>Invalid link.</h1>
+      <p>This unsubscribe link is missing or invalid. If you need help, contact <a href="mailto:hello@balhance.com" style="color:var(--navy);">hello@balhance.com</a>.</p>
+      <a href="index.html" class="btn-home">Back to Balhance</a>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://uyucyxbytvtdbrxrjeak.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dWN5eGJ5dHZ0ZGJyeHJqZWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTE4MDksImV4cCI6MjA4ODkyNzgwOX0.Y0p1mWxvuenXjyaF8jlJvyc5RKadh0LnAoQYCiDiDos'
+    );
+
+    function showState(id) {
+      ['state-pending','state-success','state-already','state-error','state-invalid'].forEach(s => {
+        document.getElementById(s).classList.remove('visible');
+      });
+      document.getElementById(id).classList.add('visible');
+    }
+
+    async function run() {
+      const params = new URLSearchParams(window.location.search);
+      const token  = params.get('token');
+
+      if (!token) { showState('state-invalid'); return; }
+
+      // Call the security-definer RPC — no auth needed
+      const { data, error } = await sb.rpc('unsubscribe_by_token', { p_token: token });
+
+      if (error) {
+        showState('state-error');
+        return;
+      }
+
+      // data is true if a row was updated, false if already inactive
+      showState(data ? 'state-success' : 'state-already');
+    }
+
+    // Re-subscribe button
+    document.getElementById('resubBtn').addEventListener('click', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const token  = params.get('token');
+      if (!token) return;
+
+      const { error } = await sb.rpc('resubscribe_by_token', { p_token: token });
+      if (!error) {
+        document.getElementById('resubBtn').textContent = 'You\'re back on the list.';
+        document.getElementById('resubBtn').disabled = true;
+      }
+    });
+
+    run();
+  </script>
+
+</body>
+</html>

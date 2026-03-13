@@ -886,6 +886,59 @@
     /* ============================================================
        CONTACT
     ============================================================ */
+    /* ── Newsletter ── */
+    #newsletter { background: var(--navy); color: #fff; }
+    .newsletter-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .newsletter-form { width: 100%; }
+    .newsletter-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .newsletter-fields input {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid transparent;
+      padding: 0.85rem 1rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+    }
+    .newsletter-fields input:focus { border-color: var(--amber); }
+    .newsletter-fields input::placeholder { color: #9e9b95; }
+    .newsletter-btn {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--amber);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .newsletter-btn:hover { background: #8F5010; }
+    .newsletter-btn:disabled { opacity: 0.6; cursor: default; }
+    .newsletter-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.55);
+      min-height: 1.2em;
+    }
+    .newsletter-note.success { color: #7EC8A0; }
+    .newsletter-note.error   { color: #f59a9a; }
+
     #contact { background: var(--surface); }
 
     .contact-grid {
@@ -1127,6 +1180,7 @@
       #mission .mission-grid,
       .coaching-inner,
       .contact-grid,
+      .newsletter-inner,
       .approach-header { grid-template-columns: 1fr; gap: 3rem; }
 
       .services-header { grid-template-columns: 1fr; gap: 2rem; }
@@ -1539,6 +1593,32 @@
   </section>
 
   <!-- ================================================================
+       NEWSLETTER
+  ================================================================ -->
+  <section id="newsletter" class="section">
+    <div class="container">
+      <div class="newsletter-inner">
+
+        <div>
+          <p class="section-label" style="color:rgba(255,255,255,0.5);">Stay Informed</p>
+          <h2 class="section-title" style="color:#fff;">Insights on well-being, leadership, and organizational health.</h2>
+          <p class="section-lead" style="color:rgba(255,255,255,0.65);margin-top:1rem;">Join leaders who receive our research, frameworks, and perspectives — delivered directly to your inbox. Unsubscribe at any time.</p>
+        </div>
+
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="newsletter-fields">
+            <input type="text" id="nlName" placeholder="Your name" autocomplete="name" />
+            <input type="email" id="nlEmail" placeholder="Work email address" autocomplete="email" required />
+            <button type="submit" class="newsletter-btn" id="newsletterBtn">Subscribe</button>
+          </div>
+          <p class="newsletter-note" id="newsletterMsg"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
        CONTACT
   ================================================================ -->
   <section id="contact" class="section section-surface">
@@ -1724,6 +1804,44 @@
     // Close mobile nav on link click
     links.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Newsletter signup
+    document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name  = document.getElementById('nlName').value.trim();
+      const email = document.getElementById('nlEmail').value.trim();
+      const msg   = document.getElementById('newsletterMsg');
+      const btn   = document.getElementById('newsletterBtn');
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.className = 'newsletter-note error';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Subscribing…';
+      msg.textContent = '';
+      msg.className = 'newsletter-note';
+
+      const { error } = await sb.from('email_subscribers').upsert(
+        { email, name: name || null, source: 'website', is_active: true },
+        { onConflict: 'email' }
+      );
+
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+
+      if (error) {
+        msg.textContent = 'Something went wrong. Please try again.';
+        msg.className = 'newsletter-note error';
+      } else {
+        document.getElementById('nlName').value  = '';
+        document.getElementById('nlEmail').value = '';
+        msg.textContent = 'You\'re subscribed. Welcome aboard.';
+        msg.className = 'newsletter-note success';
+      }
     });
 
     // Contact form feedback
