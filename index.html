@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -886,6 +888,129 @@
     /* ============================================================
        CONTACT
     ============================================================ */
+    /* ── Insight cards (shared by homepage preview + insights.html) ── */
+    .insights-preview-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .insights-view-all {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(29,64,40,0.25);
+      transition: border-color 0.2s;
+    }
+    .insights-view-all:hover { border-color: var(--navy); }
+    .insights-view-all svg { flex-shrink: 0; }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .insight-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.25s;
+      overflow: hidden;
+    }
+    .insight-card:hover { border-color: var(--navy); }
+    .insight-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .insight-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s;
+    }
+    .insight-card:hover .insight-card-img img { transform: scale(1.04); }
+    .insight-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .insight-category {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .insight-category.research         { color: var(--navy); }
+    .insight-category.leadership       { color: var(--amber); }
+    .insight-category.thought-leadership { color: var(--gray-700); }
+    .insight-card-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .insight-card-excerpt {
+      font-size: 0.82rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .insight-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+    .insight-date {
+      font-size: 0.7rem;
+      color: var(--gray-300);
+    }
+    .insight-read-more {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .insight-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-500);
+      font-size: 0.88rem;
+    }
+
     /* ── Newsletter ── */
     #newsletter { background: var(--navy); color: #fff; }
     .newsletter-inner {
@@ -1189,6 +1314,8 @@
       .testimonial-inner { grid-template-columns: 1fr; gap: 4rem; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .mission-visual { position: static; }
+      .insights-grid { grid-template-columns: repeat(2, 1fr); }
+      .insights-preview-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
 
     @media (max-width: 560px) {
@@ -1204,6 +1331,7 @@
       .testimonial-outcomes { grid-template-columns: 1fr; }
       .mission-pillars { grid-template-columns: 1fr; }
       .contact-form { padding: 2rem 1.5rem; }
+      .insights-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1225,6 +1353,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#approach">Approach</a></li>
         <li><a href="#coaching">Coaching</a></li>
+        <li><a href="insights.html">Insights</a></li>
         <li><a href="#contact" class="nav-cta">Contact</a></li>
         <li id="authNavItem"><a href="login.html" class="nav-auth-link">Sign In</a></li>
       </ul>
@@ -1591,6 +1720,49 @@
       </div>
     </div>
   </section>
+
+  {% if site.posts.size > 0 %}
+  <!-- ================================================================
+       LATEST INSIGHTS
+  ================================================================ -->
+  <section id="insights-preview" class="section section-surface">
+    <div class="container">
+      <div class="insights-preview-header">
+        <div>
+          <p class="section-label">Insights</p>
+          <h2 class="section-title" style="margin-bottom:0;">The thinking behind the practice.</h2>
+        </div>
+        <a href="insights.html" class="insights-view-all">
+          View all insights
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/></svg>
+        </a>
+      </div>
+      <div class="insights-grid">
+        {% for post in site.posts limit:3 %}
+        {% if post.category == 'research' %}{% assign cat_label = 'Research' %}
+        {% elsif post.category == 'leadership' %}{% assign cat_label = 'Leadership' %}
+        {% elsif post.category == 'thought-leadership' %}{% assign cat_label = 'Thought Leadership' %}
+        {% else %}{% assign cat_label = 'Insights' %}{% endif %}
+        <a href="{{ post.url }}" class="insight-card">
+          <div class="insight-card-img">
+            {% if post.image and post.image != '' %}<img src="{{ post.image }}" alt="" loading="lazy" />
+            {% else %}<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#BFBBB3" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>{% endif %}
+          </div>
+          <div class="insight-card-body">
+            <span class="insight-category {{ post.category }}">{{ cat_label }}</span>
+            <h3 class="insight-card-title">{{ post.title }}</h3>
+            <p class="insight-card-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>
+            <div class="insight-card-footer">
+              <span class="insight-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+              <span class="insight-read-more">Read <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/></svg></span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
   <!-- ================================================================
        NEWSLETTER

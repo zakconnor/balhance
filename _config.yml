@@ -1,0 +1,21 @@
+title: Balhance
+description: "Advancing well-being as a strategic imperative."
+url: ""
+baseurl: ""
+
+# Article URLs: /insights/slug/
+permalink: /insights/:slug/
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Files/dirs Jekyll should not process
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

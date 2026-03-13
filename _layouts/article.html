@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page.title }} — Balhance</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink:        #0C0C0A;
+      --white:      #ffffff;
+      --navy:       #1D4028;
+      --navy-mid:   #284E30;
+      --amber:      #A85F10;
+      --surface:    #F0EDE7;
+      --surface-2:  #E1DDD7;
+      --gray-300:   #BFBBB3;
+      --gray-500:   #6B6860;
+      --gray-700:   #37342D;
+      --line:       #D2CFC8;
+      --serif:      'EB Garamond', Georgia, serif;
+      --sans:       'Inter', system-ui, sans-serif;
+      --max-w:      1280px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--surface);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--gray-500);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+    }
+    .nav-user-name {
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(29,64,40,0.3);
+    }
+    .nav-user-name:hover { text-decoration-color: var(--navy); }
+    .nav-logout {
+      color: var(--gray-500);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .nav-logout:hover { color: var(--navy); }
+    .nav-auth-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy) !important;
+      border: 1px solid var(--navy);
+      padding: 0.45rem 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-auth-link:hover {
+      background: var(--navy) !important;
+      color: #fff !important;
+    }
+
+    /* ── Article ── */
+    .article-page { padding-top: 64px; }
+
+    .article-back-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    .article-back-bar .inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0.75rem 2.5rem;
+    }
+    .article-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      transition: color 0.2s;
+    }
+    .article-back-link:hover { color: var(--navy); }
+
+    .article-header {
+      background: var(--navy);
+      padding: 4rem 2.5rem 3.5rem;
+    }
+    .article-header .inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .article-header-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .article-category-badge {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.75);
+    }
+    .article-date-author {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+    }
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.25rem;
+    }
+    .article-excerpt {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    .article-cover {
+      width: 100%;
+      max-height: 520px;
+      overflow: hidden;
+      background: var(--surface-2);
+    }
+    .article-cover img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .article-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem 6rem;
+    }
+
+    /* Prose */
+    .article-prose { line-height: 1.85; }
+    .article-prose p { font-size: 1rem; color: var(--gray-700); margin-bottom: 1.5rem; }
+    .article-prose h2 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 2.5rem 0 1rem;
+      line-height: 1.25;
+    }
+    .article-prose h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 2rem 0 0.75rem;
+    }
+    .article-prose ul,
+    .article-prose ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--gray-700);
+      font-size: 1rem;
+    }
+    .article-prose li { margin-bottom: 0.4rem; line-height: 1.7; }
+    .article-prose blockquote {
+      border-left: 3px solid var(--amber);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      margin: 2rem 0;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .article-prose a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+    .article-prose strong { font-weight: 600; color: var(--ink); }
+    .article-prose img { max-width: 100%; height: auto; display: block; margin: 2rem 0; }
+    .article-prose hr { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+
+    .article-footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem 5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      .nav-inner { padding: 0 1.25rem; }
+      .article-back-bar .inner { padding: 0.75rem 1.25rem; }
+      .article-header { padding: 3rem 1.25rem 2.5rem; }
+      .article-body { padding: 2.5rem 1.25rem 5rem; }
+      .article-footer { padding: 2rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Balhance</a>
+      <ul class="nav-links">
+        <li><a href="/#mission">Mission</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/insights.html">Insights</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li id="navAuthItem"><a href="/login.html" class="nav-auth-link">Sign In</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="article-page">
+
+    <div class="article-back-bar">
+      <div class="inner">
+        <a href="/insights.html" class="article-back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/></svg>
+          Back to Insights
+        </a>
+      </div>
+    </div>
+
+    <div class="article-header">
+      <div class="inner">
+        <div class="article-header-meta">
+          <span class="article-category-badge">{{ page.category_label | default: page.category }}</span>
+          <span class="article-date-author">
+            {{ page.date | date: "%B %-d, %Y" }}{% if page.author %} · {{ page.author }}{% endif %}
+          </span>
+        </div>
+        <h1 class="article-title">{{ page.title }}</h1>
+        {% if page.excerpt %}<p class="article-excerpt">{{ page.excerpt }}</p>{% endif %}
+      </div>
+    </div>
+
+    {% if page.image %}
+    <div class="article-cover">
+      <img src="{{ page.image }}" alt="{{ page.title }}" />
+    </div>
+    {% endif %}
+
+    <div class="article-body">
+      <div class="article-prose">
+        {{ content }}
+      </div>
+    </div>
+
+    <div class="article-footer">
+      <a href="/insights.html" class="article-back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/></svg>
+        Back to all Insights
+      </a>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://uyucyxbytvtdbrxrjeak.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dWN5eGJ5dHZ0ZGJyeHJqZWFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTE4MDksImV4cCI6MjA4ODkyNzgwOX0.Y0p1mWxvuenXjyaF8jlJvyc5RKadh0LnAoQYCiDiDos'
+    );
+    (async function() {
+      const { data: { session } } = await sb.auth.getSession();
+      const authItem = document.getElementById('navAuthItem');
+      if (session) {
+        const meta = session.user.user_metadata;
+        const name = ((meta.first_name || '') + ' ' + (meta.last_name || '')).trim();
+        authItem.innerHTML =
+          '<div class="nav-user">' +
+            '<a href="/profile.html" class="nav-user-name">' + name + '</a>' +
+            '<button class="nav-logout" id="logoutBtn" title="Sign out" aria-label="Sign out"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg></button>' +
+          '</div>';
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+          await sb.auth.signOut();
+          window.location.href = '/';
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
