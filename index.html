@@ -1825,15 +1825,20 @@
       msg.textContent = '';
       msg.className = 'newsletter-note';
 
-      const { error } = await sb.from('email_subscribers').upsert(
-        { email, name: name || null, source: 'website', is_active: true },
-        { onConflict: 'email' }
+      const { error } = await sb.from('email_subscribers').insert(
+        { email, name: name || null, source: 'website' }
       );
 
       btn.disabled = false;
       btn.textContent = 'Subscribe';
 
-      if (error) {
+      if (error && error.code === '23505') {
+        // Duplicate — already subscribed, treat as success
+        document.getElementById('nlName').value  = '';
+        document.getElementById('nlEmail').value = '';
+        msg.textContent = 'You\'re already subscribed. Thanks!';
+        msg.className = 'newsletter-note success';
+      } else if (error) {
         msg.textContent = 'Something went wrong. Please try again.';
         msg.className = 'newsletter-note error';
       } else {

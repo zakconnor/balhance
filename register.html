@@ -556,10 +556,9 @@
 
       // Subscribe to email list if opted in
       if (document.getElementById('emailOptIn').checked) {
-        await sb.from('email_subscribers').upsert(
-          { email, name: firstName + ' ' + lastName, source: 'registration', is_active: true },
-          { onConflict: 'email' }
-        );
+        await sb.from('email_subscribers').insert(
+          { email, name: firstName + ' ' + lastName, source: 'registration' }
+        ).then(() => {}); // ignore duplicate — email may already be subscribed
       }
 
       window.location.href = 'login.html?registered=1';
