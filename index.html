@@ -1611,6 +1611,9 @@
             <input type="email" id="nlEmail" placeholder="Work email address" autocomplete="email" required />
             <button type="submit" class="newsletter-btn" id="newsletterBtn">Subscribe</button>
           </div>
+          <div class="cf-turnstile" style="margin-top:1rem;"
+            data-sitekey="YOUR_TURNSTILE_SITE_KEY"
+            data-theme="dark"></div>
           <p class="newsletter-note" id="newsletterMsg"></p>
         </form>
 
@@ -1759,6 +1762,7 @@
   <!-- ================================================================
        SCRIPTS
   ================================================================ -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const { createClient } = window.supabase;
@@ -1818,6 +1822,12 @@
         return;
       }
 
+      if (!turnstile.getResponse()) {
+        msg.textContent = 'Please complete the security check.';
+        msg.className = 'newsletter-note error';
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Subscribing…';
       msg.textContent = '';
@@ -1831,6 +1841,7 @@
 
       btn.disabled = false;
       btn.textContent = 'Subscribe';
+      turnstile.reset();
 
       if (error) {
         msg.textContent = 'Something went wrong. Please try again.';
