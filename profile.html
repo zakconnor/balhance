@@ -477,6 +477,162 @@
       overflow: hidden;
     }
 
+    /* ── Booking locked state ── */
+    .booking-locked {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 3.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .booking-locked-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      margin-bottom: 0.25rem;
+    }
+    .booking-locked-title {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .booking-locked-body {
+      font-size: 0.88rem;
+      color: var(--gray-500);
+      max-width: 400px;
+      line-height: 1.65;
+    }
+    .booking-locked-cta {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .booking-locked-cta:hover { background: var(--navy-mid); }
+
+    /* ── Billing panel ── */
+    .billing-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid;
+    }
+    .billing-status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .badge-active    { color: #1D6035; background: #EAF5EE; border-color: #A3D4B5; }
+    .badge-active::before    { background: #1D6035; }
+    .badge-inactive  { color: var(--gray-500); background: var(--surface); border-color: var(--line); }
+    .badge-inactive::before  { background: var(--gray-300); }
+    .badge-cancelled { color: var(--red); background: #FEF2F3; border-color: rgba(184,48,64,0.35); }
+    .badge-cancelled::before { background: var(--red); }
+    .badge-past_due  { color: var(--amber); background: #FDF7EE; border-color: #E8C58A; }
+    .badge-past_due::before  { background: var(--amber); }
+
+    .billing-plan-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .billing-plan-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .billing-plan-name {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .billing-plan-meta {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+    }
+    .billing-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .billing-detail-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .billing-detail-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-300);
+    }
+    .billing-detail-value {
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .billing-no-plan {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .billing-no-plan-title {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+    .billing-no-plan-body {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 460px;
+    }
+    .billing-contact-link {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(29,64,40,0.35);
+    }
+    .billing-contact-link:hover { text-decoration-color: var(--navy); }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .portal-main { padding: 2rem 2rem 5rem; }
@@ -562,6 +718,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
             Book a Session
           </button>
+          <button class="sidebar-item" data-panel="billing">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7H0zm3 2h1a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2z"/></svg>
+            Billing
+          </button>
           <p class="sidebar-section-label">Settings</p>
           <button class="sidebar-item" data-panel="profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
@@ -592,7 +752,22 @@
             <h2 class="panel-title">Book a Session</h2>
             <p class="panel-subtitle">Schedule time with the Balhance team directly from your portal.</p>
           </div>
-          <div class="booking-frame-wrap">
+
+          <!-- Locked: shown when no active subscription -->
+          <div class="booking-locked" id="bookingLocked" style="display:none;">
+            <div class="booking-locked-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+            </div>
+            <p class="booking-locked-title">Subscription required</p>
+            <p class="booking-locked-body">
+              Booking a session is available to clients with an active billing plan.
+              To get started, reach out to the Balhance team and we'll set up your plan.
+            </p>
+            <button class="booking-locked-cta" id="bookingLockedCta">View billing</button>
+          </div>
+
+          <!-- Calendar: shown when subscription is active -->
+          <div class="booking-frame-wrap" id="bookingCalendar" style="display:none;">
             <!-- Google Calendar Appointment Scheduling begin -->
             <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1RGnRpm-KtNULJCdIL1fllAnsK87tUWlITXpDW7oswO4qp1hqib70vegcaJ_ZkuYA2WqDB5TLa?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
             <!-- end Google Calendar Appointment Scheduling -->
@@ -737,6 +912,70 @@
 
         </div>
 
+        <!-- ── Panel: Billing ── -->
+        <div class="panel" id="panel-billing">
+          <div class="panel-header">
+            <h2 class="panel-title">Billing</h2>
+            <p class="panel-subtitle">View your current plan and subscription status.</p>
+          </div>
+
+          <!-- Active / inactive plan card -->
+          <div id="billingHasPlan" style="display:none;">
+            <div class="profile-section">
+              <div class="section-head">
+                <span class="section-title">Current Plan</span>
+                <span id="billingStatusBadge" class="billing-status-badge"></span>
+              </div>
+              <div class="section-body">
+                <div class="billing-plan-card">
+                  <div class="billing-plan-row">
+                    <div>
+                      <div class="billing-plan-name" id="billingPlanName">—</div>
+                      <div class="billing-plan-meta" id="billingPlanMeta"></div>
+                    </div>
+                  </div>
+                  <div class="billing-details-grid">
+                    <div class="billing-detail-item">
+                      <span class="billing-detail-label">Status</span>
+                      <span class="billing-detail-value" id="billingDetailStatus">—</span>
+                    </div>
+                    <div class="billing-detail-item">
+                      <span class="billing-detail-label">Billing period</span>
+                      <span class="billing-detail-value" id="billingDetailPeriod">—</span>
+                    </div>
+                    <div class="billing-detail-item">
+                      <span class="billing-detail-label">Period start</span>
+                      <span class="billing-detail-value" id="billingDetailStart">—</span>
+                    </div>
+                    <div class="billing-detail-item">
+                      <span class="billing-detail-label">Next renewal</span>
+                      <span class="billing-detail-value" id="billingDetailEnd">—</span>
+                    </div>
+                  </div>
+                </div>
+                <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.25rem;">
+                  To make changes to your plan, please
+                  <a href="index.html#contact" class="billing-contact-link">contact the Balhance team</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- No plan state -->
+          <div id="billingNoPlan" style="display:none;">
+            <div class="billing-no-plan">
+              <div class="billing-status-badge badge-inactive">No active plan</div>
+              <p class="billing-no-plan-title">You don't have an active subscription yet.</p>
+              <p class="billing-no-plan-body">
+                Booking sessions and accessing coaching services requires an active billing plan
+                with Balhance. Reach out to us and we'll get you set up.
+              </p>
+              <a href="index.html#contact" class="billing-contact-link">Contact us to subscribe &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+
       </main>
     </div>
   </div>
@@ -751,6 +990,7 @@
 
     let currentSession = null;
     let currentProfile = null;
+    let currentSubscription = null;
     let pendingPhotoFile = null;
 
     /* ── Sidebar panel switching ── */
@@ -842,17 +1082,57 @@
       document.getElementById('email').value     = session.user.email || '';
     }
 
+    /* ── Subscription helpers ── */
+    function applyBookingAccess(sub) {
+      const hasAccess = sub && sub.status === 'active';
+      document.getElementById('bookingCalendar').style.display = hasAccess ? 'block' : 'none';
+      document.getElementById('bookingLocked').style.display   = hasAccess ? 'none'  : 'block';
+    }
+
+    function populateBillingPanel(sub) {
+      if (!sub) {
+        document.getElementById('billingHasPlan').style.display = 'none';
+        document.getElementById('billingNoPlan').style.display  = 'block';
+        return;
+      }
+      document.getElementById('billingNoPlan').style.display  = 'none';
+      document.getElementById('billingHasPlan').style.display = 'block';
+
+      const statusLabels = { active: 'Active', inactive: 'Inactive', cancelled: 'Cancelled', past_due: 'Past due' };
+      const periodLabels = { monthly: 'Monthly', quarterly: 'Quarterly', annual: 'Annual' };
+
+      // Badge
+      const badge = document.getElementById('billingStatusBadge');
+      badge.textContent = statusLabels[sub.status] || sub.status;
+      badge.className = 'billing-status-badge badge-' + sub.status;
+
+      // Plan name & meta
+      document.getElementById('billingPlanName').textContent =
+        sub.plan_name || 'Balhance Plan';
+      document.getElementById('billingPlanMeta').textContent =
+        sub.billing_period ? periodLabels[sub.billing_period] + ' billing' : '';
+
+      // Detail cells
+      document.getElementById('billingDetailStatus').textContent =
+        statusLabels[sub.status] || sub.status;
+      document.getElementById('billingDetailPeriod').textContent =
+        sub.billing_period ? periodLabels[sub.billing_period] : '—';
+
+      const fmt = (iso) => iso ? new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '—';
+      document.getElementById('billingDetailStart').textContent = fmt(sub.current_period_start);
+      document.getElementById('billingDetailEnd').textContent   = fmt(sub.current_period_end);
+    }
+
     /* ── Init ── */
     async function init() {
       const { data: { session } } = await sb.auth.getSession();
       if (!session) { window.location.href = 'login.html'; return; }
       currentSession = session;
 
-      const { data: profile } = await sb
-        .from('profiles')
-        .select('*')
-        .eq('id', session.user.id)
-        .single();
+      const [{ data: profile }, { data: subscription }] = await Promise.all([
+        sb.from('profiles').select('*').eq('id', session.user.id).single(),
+        sb.from('subscriptions').select('*').eq('user_id', session.user.id).maybeSingle()
+      ]);
 
       currentProfile = profile || {
         first_name: session.user.user_metadata.first_name || '',
@@ -865,7 +1145,11 @@
         currentProfile.avatar_url = session.user.user_metadata.avatar_url;
       }
 
+      currentSubscription = subscription || null;
+
       populateUI(session, currentProfile);
+      applyBookingAccess(currentSubscription);
+      populateBillingPanel(currentSubscription);
     }
 
     /* ── Photo upload ── */
@@ -1090,6 +1374,14 @@
         document.getElementById('confirmPassword').value = '';
         showToast(msg);
       }
+    });
+
+    /* ── Booking locked CTA → go to Billing panel ── */
+    document.getElementById('bookingLockedCta').addEventListener('click', () => {
+      document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('.sidebar-item[data-panel="billing"]').classList.add('active');
+      document.getElementById('panel-billing').classList.add('active');
     });
 
     /* ── Sign out ── */
