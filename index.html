@@ -1814,20 +1814,16 @@
       msg.textContent = '';
       msg.className = 'newsletter-note';
 
-      const { error } = await sb.from('email_subscribers').insert(
-        { email, name: name || null, source: 'website' }
-      );
+      const { error } = await sb.rpc('subscribe_or_resubscribe', {
+        p_email: email,
+        p_name: name || null,
+        p_source: 'website'
+      });
 
       btn.disabled = false;
       btn.textContent = 'Subscribe';
 
-      if (error && error.code === '23505') {
-        // Duplicate — already subscribed, treat as success
-        document.getElementById('nlName').value  = '';
-        document.getElementById('nlEmail').value = '';
-        msg.textContent = 'You\'re already subscribed. Thanks!';
-        msg.className = 'newsletter-note success';
-      } else if (error) {
+      if (error) {
         msg.textContent = 'Something went wrong. Please try again.';
         msg.className = 'newsletter-note error';
       } else {
