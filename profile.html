@@ -92,20 +92,17 @@
     }
     .nav-user-name:hover { text-decoration-color: var(--navy); }
     .nav-logout {
-      font-size: 0.72rem;
-      font-weight: 500;
       color: var(--gray-500);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      text-decoration-color: var(--line);
       cursor: pointer;
       background: none;
       border: none;
-      padding: 0;
-      font-family: var(--sans);
+      padding: 2px;
+      display: flex;
+      align-items: center;
       transition: color 0.2s;
     }
     .nav-logout:hover { color: var(--navy); }
+    .nav-logout svg { display: block; }
 
     /* ── Page shell ── */
     .profile-page {
@@ -428,8 +425,10 @@
       background: #fff;
       color: var(--red);
       border: 1px solid rgba(184,48,64,0.35);
-      padding: 0.65rem 1.5rem;
+      padding: 0.65rem 1rem;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
       transition: background 0.2s, border-color 0.2s;
     }
     .btn-danger:hover { background: #FEF2F3; border-color: var(--red); }
@@ -608,7 +607,9 @@
           <span class="section-desc">Sign out of your Balhance account on this device.</span>
         </div>
         <div class="section-body">
-          <button class="btn-danger" id="signOutBtn">Sign out</button>
+          <button class="btn-danger" id="signOutBtn" title="Sign out" aria-label="Sign out">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>
+          </button>
         </div>
       </div>
 
@@ -683,7 +684,9 @@
       navItem.innerHTML =
         '<div class="nav-user">' +
           '<a href="profile.html" class="nav-user-name">' + firstName + ' ' + lastName + '</a>' +
-          '<button class="nav-logout" id="navLogoutBtn">Sign out</button>' +
+          '<button class="nav-logout" id="navLogoutBtn" title="Sign out" aria-label="Sign out">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/><path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/></svg>' +
+          '</button>' +
         '</div>';
       document.getElementById('navLogoutBtn').addEventListener('click', async () => {
         await sb.auth.signOut();
@@ -725,8 +728,12 @@
         last_name:  session.user.user_metadata.last_name  || '',
         company:    session.user.user_metadata.company    || '',
         title:      session.user.user_metadata.title      || '',
-        avatar_url: null
+        avatar_url: session.user.user_metadata.avatar_url || null
       };
+      // Fallback: if DB row exists but avatar_url is missing, check user_metadata
+      if (currentProfile && !currentProfile.avatar_url && session.user.user_metadata.avatar_url) {
+        currentProfile.avatar_url = session.user.user_metadata.avatar_url;
+      }
 
       populateUI(session, currentProfile);
     }
@@ -800,6 +807,9 @@
         .update({ avatar_url: publicUrl })
         .eq('id', currentSession.user.id);
 
+      // Mirror to user_metadata so it survives even if the profiles row is missing
+      await sb.auth.updateUser({ data: { avatar_url: publicUrl } });
+
       if (dbErr) {
         showToast('Could not save photo URL: ' + dbErr.message, 'error');
       } else {
@@ -824,6 +834,8 @@
         .from('profiles')
         .update({ avatar_url: null })
         .eq('id', currentSession.user.id);
+
+      await sb.auth.updateUser({ data: { avatar_url: null } });
 
       if (error) {
         showToast('Could not remove photo.', 'error');
