@@ -229,6 +229,22 @@
       padding-top: 64px;
     }
 
+    .cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: currentColor; /* inherits your headline color automatically */
+  margin-left: 2px;
+  vertical-align: middle;
+  border-radius: 1px;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -1299,7 +1315,7 @@
         <p class="hero-tag">Organizational Research, Leadership Advisory, and Coaching</p>
         <h1 class="hero-headline">
           Find the Balance That<br>
-          Enhances&nbsp;Everything.
+          Enhances Your&nbsp;<span id="typed"></span><span class="cursor"></span>
         </h1>
         <p class="hero-sub">
           Balhance works with growing organizations and mission-driven teams
@@ -1870,6 +1886,41 @@
       a.addEventListener('click', () => links.classList.remove('open'));
     });
 
+    //Animated header text
+const words = ["Organization.", "Employees.", "Leadership.", "Community."];
+const el = document.getElementById('typed');
+
+let wordIndex = 0, charIndex = 0, deleting = false;
+const TYPE_SPEED  = 90;   // ms per character typing forward
+const DELETE_SPEED = 45;  // ms per character deleting
+const PAUSE = 2000;       // ms to hold after fully typed
+
+function tick() {
+  const current = words[wordIndex];
+
+  if (!deleting) {
+    el.textContent = current.slice(0, ++charIndex);
+    if (charIndex === current.length) {
+      deleting = true;
+      return setTimeout(tick, PAUSE);
+    }
+  } else {
+    el.textContent = current.slice(0, --charIndex);
+    if (charIndex === 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+    }
+  }
+
+  setTimeout(tick, deleting ? DELETE_SPEED : TYPE_SPEED);
+}
+
+// Start with "Organization." already visible, then begin the loop
+el.textContent = words[0];
+charIndex = words[0].length;
+deleting = true;
+setTimeout(tick, PAUSE); // hold for PAUSE before first backspace
+    
     // Newsletter signup
     document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
       e.preventDefault();
