@@ -4,7 +4,7 @@ title: "The ROI of Organizational Well-Being"
 category: research
 category_label: Research
 excerpt: "New research reveals that organizations investing systematically in employee well-being outperform their peers on revenue growth, retention, and innovation — by a margin that can no longer be ignored."
-image: <img src="/assets/hero-bg.png">
+image: /assets/hero-bg.png
 author: Balhance Team
 ---
 
