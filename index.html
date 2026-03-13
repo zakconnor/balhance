@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Balhance — Employee Well-Being Research & Advisory</title>
-  <meta name="description" content="Balhance helps organizations build sustainable cultures through rigorous research, executive advisory, and leadership coaching." />
+  <title>Organizational Research, Leadership Advisory &amp; Coaching | Balhance</title>
+  <meta name="description" content="Balhance helps growing organizations and nonprofits find the balance that enhances employee, organizational, and community well-being — through research, leadership advisory, and one-on-one coaching." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -267,7 +267,17 @@
       color: rgba(255,255,255,0.58);
       line-height: 1.85;
       max-width: 520px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-brand-line {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+      max-width: 520px;
       margin-bottom: 2.75rem;
+      font-style: italic;
     }
 
     .hero-actions {
@@ -399,7 +409,7 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .stat-item {
@@ -490,7 +500,7 @@
 
     .mission-pillars {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
       margin-top: 2.5rem;
       border-top: 1px solid var(--line);
@@ -811,6 +821,18 @@
       line-height: 1.6;
       max-width: 220px;
     }
+    .cs-label-statement {
+      max-width: 100%;
+      font-size: 0.875rem;
+      font-style: italic;
+      line-height: 1.75;
+    }
+    .c-card-body {
+      font-size: 0.875rem;
+      color: var(--on-dark-mid);
+      line-height: 1.7;
+      margin-top: 0.75rem;
+    }
 
     /* ============================================================
        TESTIMONIAL
@@ -827,6 +849,11 @@
       grid-template-columns: 1.1fr 1fr;
       gap: 7rem;
       align-items: center;
+    }
+    .testimonial-inner--centered {
+      grid-template-columns: 1fr;
+      max-width: 760px;
+      margin: 0 auto;
     }
 
     .testimonial-mark {
@@ -881,6 +908,38 @@
       font-size: 0.78rem;
       color: var(--gray-500);
       line-height: 1.55;
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about {
+      background: var(--surface);
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--line);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .about-photo-placeholder {
+      aspect-ratio: 3/4;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-500);
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .about-body p {
+      margin-bottom: 1.25rem;
+      color: var(--gray-700);
+      line-height: 1.85;
     }
 
     /* ============================================================
@@ -1174,8 +1233,7 @@
 
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid var(--line); }
-      .stat-item:nth-child(4) { border-right: none; border-top: 1px solid var(--line); }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--line); border-right: none; }
 
       #mission .mission-grid,
       .coaching-inner,
@@ -1187,6 +1245,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .approach-grid { grid-template-columns: 1fr; }
       .testimonial-inner { grid-template-columns: 1fr; gap: 4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .mission-visual { position: static; }
     }
@@ -1197,8 +1256,7 @@
       .container { padding: 0 1.5rem; }
       .stats-grid { grid-template-columns: 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--line); }
-      .stat-item:nth-child(3),
-      .stat-item:nth-child(4) { border-top: none; }
+      .stat-item:nth-child(3) { border-top: none; }
       .form-row { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .testimonial-outcomes { grid-template-columns: 1fr; }
@@ -1238,20 +1296,22 @@
     <div class="hero-bg"></div>
     <div class="container">
       <div class="hero-content">
-        <p class="hero-tag">Employee Well-Being Research &amp; Advisory</p>
+        <p class="hero-tag">Organizational Research  &bull;  Leadership Advisory  &bull;  Leadership Coaching</p>
         <h1 class="hero-headline">
-          The science of <em>balhance</em>&nbsp;—<br>
-          the art of lasting&nbsp;change.
+          Find the Balance That<br>
+          Enhances&nbsp;Everything.
         </h1>
         <p class="hero-sub">
-          Balhance partners with organizations to understand, measure, and
-          elevate the conditions that allow people to thrive — through
-          rigorous research, executive advisory, and transformative leadership
-          coaching.
+          Balhance works with growing organizations and mission-driven teams
+          to build healthier workplaces, stronger leaders, and cultures where
+          people actually want to stay.
+        </p>
+        <p class="hero-brand-line">
+          The name says it all: balance + enhance. Because the best results don't come from pushing harder — they come from getting the conditions right so that your people, your organization, and the community you serve can all move forward together.
         </p>
         <div class="hero-actions">
           <a href="#contact" class="btn-primary">Start a Conversation</a>
-          <a href="#services" class="btn-ghost">Our Services</a>
+          <a href="#services" class="btn-ghost">Explore Our Services</a>
         </div>
       </div>
     </div>
@@ -1270,10 +1330,6 @@
         <div class="stat-item">
           <div class="stat-number">10+</div>
           <div class="stat-label">Years Leadership Experience</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">$200K</div>
-          <div class="stat-label">AI Initiative Savings</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">15+</div>
@@ -1307,30 +1363,29 @@
 
         <div class="mission-body">
           <p class="section-label">Our Mission</p>
-          <h2 class="section-title">Advancing well-being as a strategic imperative.</h2>
+          <h2 class="section-title">When your people are well, your organization performs. When your organization is healthy, your community feels it too.</h2>
           <div class="rule"></div>
           <p>
-            Balhance was founded on a simple but powerful conviction: organizations that invest in the whole person outperform those that do not. We translate that into measurable outcomes — combining academic rigor with practical wisdom to help leadership teams build cultures where people genuinely flourish.
+            Most organizations know something isn't working. People are burning out. Good employees are leaving. Leadership feels stuck. The culture doesn't reflect what you actually stand for.
           </p>
           <p>
-            We are not a wellness vendor. We are a research-driven advisory practice that works closely with C-suite leaders and HR executives to diagnose the real drivers of imbalance, design evidence-based interventions, and sustain meaningful change over time.
+            Balhance exists to help you fix that — not with a generic program or a one-size-fits-all framework, but with a clear-eyed look at what's actually going on and a practical path to something better.
+          </p>
+          <p>
+            We work with growing companies and mission-driven organizations who understand that investing in their people isn't just the right thing to do. It's what makes everything else work.
           </p>
           <div class="mission-pillars">
             <div class="pillar">
-              <div class="pillar-title">Evidence-Led</div>
-              <div class="pillar-text">Every recommendation is grounded in peer-reviewed research and organizational data.</div>
+              <div class="pillar-title">Insight Over Assumption</div>
+              <div class="pillar-text">We find out what is actually driving your people challenges before recommending anything. No guesswork.</div>
             </div>
             <div class="pillar">
-              <div class="pillar-title">Deeply Human</div>
-              <div class="pillar-text">We treat employees as whole people, not productivity metrics.</div>
+              <div class="pillar-title">The Whole Picture</div>
+              <div class="pillar-text">Employee well-being, organizational health, and community impact are connected. We work at all three levels.</div>
             </div>
             <div class="pillar">
-              <div class="pillar-title">Systems-Focused</div>
-              <div class="pillar-text">We address culture, process, and leadership — not surface symptoms.</div>
-            </div>
-            <div class="pillar">
-              <div class="pillar-title">Confidential</div>
-              <div class="pillar-text">All research and advisory engagements operate under strict confidentiality.</div>
+              <div class="pillar-title">Built to Last</div>
+              <div class="pillar-text">We don't hand you a report and leave. We work alongside your leadership until the change is real and sustainable.</div>
             </div>
           </div>
         </div>
@@ -1347,11 +1402,11 @@
       <div class="services-header">
         <div>
           <p class="section-label">What We Do</p>
-          <h2 class="section-title">Three interlocking disciplines.</h2>
+          <h2 class="section-title">Three ways to work together.</h2>
           <div class="rule"></div>
         </div>
         <p class="section-lead">
-          Each engagement draws on one of our three core practices — research, advisory, and coaching — calibrated to the specific challenges and ambitions of your organization.
+          Whether you need a clearer picture of what's happening inside your organization, a strategic partner for your leadership team, or a coaching relationship that helps you grow as a leader — Balhance meets you where you are. Every engagement is built around your specific situation, not a template.
         </p>
       </div>
 
@@ -1361,29 +1416,29 @@
           <div class="service-num">01</div>
           <h3 class="service-title">Organizational Research</h3>
           <p class="service-desc">
-            Rigorous, confidential research conducted inside your organization to identify the true drivers of employee well-being, burnout, and disengagement.
+            Get clear on what's really going on. You can't fix what you don't understand — so we go inside your organization to find the patterns that leadership often can't see from the top.
           </p>
           <ul class="service-list">
-            <li>Diagnostic surveys &amp; interviews</li>
-            <li>Quantitative &amp; qualitative analysis</li>
-            <li>Benchmarking against peer organizations</li>
-            <li>Well-being index scoring</li>
-            <li>Custom research frameworks</li>
+            <li>A clear diagnosis of root causes, not symptoms</li>
+            <li>An honest picture of how culture, structure, and leadership affect performance</li>
+            <li>Specific, prioritized recommendations your team can act on</li>
+            <li>Confidence that decisions are based on real insight</li>
+            <li>A foundation for any culture, strategy, or leadership change</li>
           </ul>
         </div>
 
         <div class="service-card">
           <div class="service-num">02</div>
-          <h3 class="service-title">Executive Advisory</h3>
+          <h3 class="service-title">Leadership Advisory</h3>
           <p class="service-desc">
-            Strategic consulting for leadership teams navigating the intersection of human performance, organizational health, and sustainable growth.
+            A strategic partner for your leadership team. Balhance works alongside senior leaders as a trusted advisor — helping you think more clearly, make better decisions, and build an organization that is genuinely sustainable.
           </p>
           <ul class="service-list">
-            <li>C-suite &amp; board presentations</li>
-            <li>Culture change strategy</li>
-            <li>Policy &amp; program design</li>
-            <li>Well-being governance frameworks</li>
-            <li>Ongoing advisory retainers</li>
+            <li>Honest outside perspective on your biggest challenges</li>
+            <li>Culture and organizational health strategy grounded in what your people need</li>
+            <li>Support navigating growth, restructuring, and leadership transitions</li>
+            <li>Clear frameworks for better decisions about people and culture</li>
+            <li>Ongoing advisory access for organizations in sustained change</li>
           </ul>
         </div>
 
@@ -1391,14 +1446,14 @@
           <div class="service-num">03</div>
           <h3 class="service-title">Leadership Coaching</h3>
           <p class="service-desc">
-            Individualized coaching engagements designed to help leaders model balance, strengthen their own resilience, and inspire healthier team cultures.
+            One-on-one coaching for leaders who want to grow. This is a space to slow down, get honest, and build the kind of leadership that lasts — not about fixing something broken, but becoming more intentional and resilient.
           </p>
           <ul class="service-list">
-            <li>1-on-1 executive coaching</li>
-            <li>Team-based coaching programs</li>
-            <li>Resilience &amp; stress mastery</li>
-            <li>Boundary-setting for leaders</li>
-            <li>Purpose &amp; presence work</li>
+            <li>A confidential space for your biggest leadership challenges</li>
+            <li>Clearer sense of who you are as a leader and how you want to show up</li>
+            <li>Better tools for managing stress, pressure, and senior leadership demands</li>
+            <li>Stronger relationships with your team and peers</li>
+            <li>Confidence to lead through change and uncertainty without burning out</li>
           </ul>
         </div>
 
@@ -1414,11 +1469,11 @@
       <div class="approach-header">
         <div>
           <p class="section-label">How We Work</p>
-          <h2 class="section-title">A structured path from insight to impact.</h2>
+          <h2 class="section-title">We listen before we recommend. Always.</h2>
           <div class="rule"></div>
         </div>
         <p class="section-lead">
-          Our methodology integrates thousands of hours of research with practical business advisory — delivering not just diagnoses, but lasting organizational change.
+          Every organization is different. The challenges that look the same on the surface almost never have the same root cause. That's why we don't arrive with a pre-built answer. Every Balhance engagement starts with genuine curiosity about your specific situation — your people, your history, your goals, and the pressures your leadership is navigating.
         </p>
       </div>
 
@@ -1427,55 +1482,55 @@
           <div class="step">
             <div class="step-num">01</div>
             <div class="step-content">
-              <h3 class="step-title">Discovery &amp; Scoping</h3>
-              <p class="step-text">We begin with a deep listening session — understanding your organization's context, goals, and the specific challenges your people are facing.</p>
+              <h3 class="step-title">Listen First</h3>
+              <p class="step-text">We start by understanding your organization, not pitching a solution. That means real conversations with you and your leadership team about what's happening, what you've tried, and what you actually need.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">02</div>
             <div class="step-content">
-              <h3 class="step-title">Research &amp; Diagnosis</h3>
-              <p class="step-text">Using validated instruments and custom frameworks, we gather quantitative and qualitative data across all relevant organizational levels.</p>
+              <h3 class="step-title">Find the Real Story</h3>
+              <p class="step-text">We go deeper than surface symptoms — gathering information from across your organization to understand what's actually driving the challenges you're facing.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">03</div>
             <div class="step-content">
-              <h3 class="step-title">Analysis &amp; Insight</h3>
-              <p class="step-text">Our team synthesizes findings into a clear picture of well-being drivers and barriers, with prioritized recommendations for leadership action.</p>
+              <h3 class="step-title">Make Sense of It</h3>
+              <p class="step-text">We turn what we learn into a clear, honest picture that your leadership team can understand and act on. No jargon. No 80-page report that sits on a shelf.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">04</div>
             <div class="step-content">
-              <h3 class="step-title">Implementation &amp; Coaching</h3>
-              <p class="step-text">We work alongside your leadership team to put recommendations into practice — including coaching support to sustain behavioral change.</p>
+              <h3 class="step-title">Work on It Together</h3>
+              <p class="step-text">We don't hand you a plan and disappear. We work alongside your team to put recommendations into practice — adjusting as you go.</p>
             </div>
           </div>
           <div class="step">
             <div class="step-num">05</div>
             <div class="step-content">
-              <h3 class="step-title">Measurement &amp; Refinement</h3>
-              <p class="step-text">We track progress against agreed metrics and iterate the approach based on what's working — ensuring your investment in balance compounds over time.</p>
+              <h3 class="step-title">Make Sure It Sticks</h3>
+              <p class="step-text">We track what's changing and what isn't, so the work keeps producing results over time — not just in the months after an engagement.</p>
             </div>
           </div>
         </div>
 
         <div class="approach-highlights">
           <div class="highlight-card">
-            <div class="highlight-tag">Research Foundation</div>
-            <div class="highlight-title">Grounded in the Rigor of Academic Research</div>
-            <div class="highlight-body">Our frameworks draw on established bodies of research, including the Job Demands-Resources model, Self-Determination Theory, and the latest studies in workplace flourishing and sustainable performance.</div>
+            <div class="highlight-tag">Real Experience</div>
+            <div class="highlight-title">Built on Years of Leading Organizational Change</div>
+            <div class="highlight-body">Every recommendation is shaped by direct experience leading change initiatives and working alongside leadership teams navigating real pressure — informed by deep knowledge of what the research says actually works.</div>
           </div>
           <div class="highlight-card">
-            <div class="highlight-tag">Advisory Practice</div>
-            <div class="highlight-title">From Data to Boardroom-Ready Strategy</div>
-            <div class="highlight-body">We translate complex research findings into clear, actionable strategic plans that resonate with executive audiences and drive real organizational decision-making.</div>
+            <div class="highlight-tag">Tailored Approach</div>
+            <div class="highlight-title">No Templates. No Off-the-Shelf Answers.</div>
+            <div class="highlight-body">We build each engagement around your specific situation. What works for one organization may not work for another — and we take that seriously from the first conversation.</div>
           </div>
           <div class="highlight-card">
             <div class="highlight-tag">Confidentiality</div>
             <div class="highlight-title">A Safe Environment for Honest Inquiry</div>
-            <div class="highlight-body">All research and coaching engagements are governed by strict confidentiality agreements. Employees participate knowing their voices are protected, yielding richer, more accurate data.</div>
+            <div class="highlight-body">All research and coaching engagements are governed by strict confidentiality agreements. Your people participate knowing their voices are protected — which is what makes the insight real.</div>
           </div>
         </div>
       </div>
@@ -1494,32 +1549,32 @@
           <h2 class="section-title">Balance begins at the top.</h2>
           <div class="rule"></div>
           <p>
-            Leaders set the tone for everything. When executives model balance — genuinely, not performatively — it gives permission for the entire organization to do the same. Our leadership coaching practice is built on this conviction.
+            The culture of any organization reflects the people leading it. When leaders are stretched thin, reactive, and running on empty — their teams feel it. When leaders are clear, grounded, and intentional — that spreads too.
           </p>
           <p>
-            We work with individual leaders and leadership teams to develop the self-awareness, skills, and habits that sustain high performance without sacrificing well-being. Each coaching engagement is tailored to the specific pressures, strengths, and aspirations of the individual.
+            Balhance leadership coaching is built for leaders who want to show up at their best — for their teams, their organizations, and themselves. It's a serious commitment to growth, and it shows in the results.
           </p>
 
           <div class="coaching-features">
             <div class="coaching-feature">
               <div class="cf-num">01</div>
               <div class="cf-text">
-                <div class="cf-title">Individual Executive Coaching</div>
-                <div class="cf-desc">Tailored 1-on-1 sessions exploring purpose, resilience, boundaries, and leadership presence — delivered virtually or in person.</div>
+                <div class="cf-title">Individual Leadership Coaching</div>
+                <div class="cf-desc">One-on-one sessions focused on you — your strengths, your blind spots, your goals, and what gets in the way. Delivered virtually or in person.</div>
               </div>
             </div>
             <div class="coaching-feature">
               <div class="cf-num">02</div>
               <div class="cf-text">
-                <div class="cf-title">Senior Leadership Team Programs</div>
-                <div class="cf-desc">Multi-session group coaching that builds cohesion, shared language around well-being, and aligned leadership behaviors across your executive team.</div>
+                <div class="cf-title">Leadership Team Programs</div>
+                <div class="cf-desc">Group sessions that help your senior team work better together — building trust, shared language, and aligned habits around what it means to lead well in your organization.</div>
               </div>
             </div>
             <div class="coaching-feature">
               <div class="cf-num">03</div>
               <div class="cf-text">
-                <div class="cf-title">Ongoing Advisory Support</div>
-                <div class="cf-desc">Retainer-based access to advisory and coaching resources for organizations committed to sustained culture change over the long term.</div>
+                <div class="cf-title">Ongoing Advisory Access</div>
+                <div class="cf-desc">Retainer-based support for organizations that want consistent, long-term coaching and advisory as they grow and change.</div>
               </div>
             </div>
           </div>
@@ -1527,28 +1582,22 @@
 
         <div class="coaching-visual">
           <div class="c-card">
-            <p class="c-card-label">Program Focus Areas</p>
+            <p class="c-card-label">Focus Areas</p>
             <ul class="c-card-items">
-              <li>Sustainable high performance</li>
-              <li>Emotional intelligence &amp; regulation</li>
-              <li>Authentic leadership presence</li>
-              <li>Boundaries &amp; recovery practices</li>
+              <li>Performing at a high level without running yourself into the ground</li>
+              <li>Managing the emotional weight of leadership</li>
+              <li>Building trust and psychological safety with your team</li>
+              <li>Leading through uncertainty, change, and tough decisions</li>
+              <li>Being the kind of leader your people want to follow</li>
             </ul>
           </div>
           <div class="c-card">
-            <p class="c-card-label">Coaching Methodology</p>
-            <h4 class="c-card-title">Evidenced-based. Human-centered. Results-driven.</h4>
-            <ul class="c-card-items">
-              <li>Co-active coaching framework</li>
-              <li>Positive psychology principles</li>
-              <li>Somatic &amp; mindfulness practices</li>
-              <li>360-degree feedback integration</li>
-              <li>Measurable behavioral outcomes</li>
-            </ul>
+            <p class="c-card-label">Our Approach</p>
+            <h4 class="c-card-title">Grounded in experience. Shaped by what's true for you.</h4>
+            <p class="c-card-body">Balhance coaching is grounded in real experience leading change and working with organizations — informed by deep knowledge of what the research says actually works, and always shaped by what is true for you.</p>
           </div>
           <div class="coaching-stat">
-            <div class="cs-num">87%</div>
-            <div class="cs-label">of coached leaders report improved team climate within 6 months</div>
+            <div class="cs-label cs-label-statement">Results vary by engagement — but the leaders who commit to this work consistently report feeling more effective, less reactive, and better equipped to lead the organizations they care about.</div>
           </div>
         </div>
 
@@ -1561,7 +1610,7 @@
   ================================================================ -->
   <section id="testimonial">
     <div class="container">
-      <div class="testimonial-inner">
+      <div class="testimonial-inner testimonial-inner--centered">
         <div class="testimonial-side">
           <div class="testimonial-mark">&ldquo;</div>
           <p class="testimonial-text">
@@ -1569,24 +1618,6 @@
           </p>
           <p class="testimonial-attr-name">Chief People Officer</p>
           <p class="testimonial-attr-role">Global Financial Services Firm</p>
-        </div>
-        <div class="testimonial-outcomes">
-          <div class="outcome">
-            <div class="outcome-val">38%</div>
-            <div class="outcome-label">Reduction in voluntary turnover within 12 months of engagement</div>
-          </div>
-          <div class="outcome">
-            <div class="outcome-val">2.4×</div>
-            <div class="outcome-label">Improvement in employee well-being index scores</div>
-          </div>
-          <div class="outcome">
-            <div class="outcome-val">91%</div>
-            <div class="outcome-label">Leadership team rated coaching as "highly impactful"</div>
-          </div>
-          <div class="outcome">
-            <div class="outcome-val">+29pt</div>
-            <div class="outcome-label">eNPS increase year-over-year post-engagement</div>
-          </div>
         </div>
       </div>
     </div>
@@ -1622,6 +1653,39 @@
   </section>
 
   <!-- ================================================================
+       ABOUT
+  ================================================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-photo-placeholder" role="img" aria-label="Professional photo of Balhance founder — leadership coaching and organizational consulting">
+          Photo coming soon
+        </div>
+
+        <div class="about-body">
+          <p class="section-label">About</p>
+          <h2 class="section-title">This work is personal.</h2>
+          <div class="rule"></div>
+          <p>
+            I started Balhance because I've spent my career at the intersection of leadership, organizational change, and human well-being — and I know what it costs when organizations get that balance wrong.
+          </p>
+          <p>
+            I've led change initiatives, worked alongside leadership teams navigating real pressure, and spent years studying what the research says about what actually makes organizations healthy.
+          </p>
+          <p>
+            Balhance is how I put that into practice. The name is the mission: balance + enhance. Because the organizations I want to work with aren't looking for a quick fix. They want to build something that lasts — for their people, their culture, and the communities they serve.
+          </p>
+          <p>
+            I work with mid-size organizations and nonprofits who are serious about that kind of change.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
        CONTACT
   ================================================================ -->
   <section id="contact" class="section section-surface">
@@ -1633,10 +1697,10 @@
           <h2 class="section-title">Let's talk about what balance looks like for your organization.</h2>
           <div class="rule"></div>
           <p>
-            Whether you're grappling with rising burnout, post-restructuring disengagement, or simply a conviction that your culture could be healthier — we'd welcome a conversation.
+            If something in here resonated — if you're dealing with disengagement, a culture that isn't working, a leadership team that needs honest outside perspective, or just a sense that your people deserve better — reach out.
           </p>
           <p>
-            Initial consultations are complimentary and confidential. We'll listen carefully before proposing anything.
+            We'll have a real conversation before either of us commits to anything. First consultations are always complimentary and confidential.
           </p>
 
           <div class="contact-details">
@@ -1689,10 +1753,10 @@
               <select id="service" name="service">
                 <option value="">Select a service area…</option>
                 <option>Organizational Research</option>
-                <option>Executive Advisory</option>
+                <option>Leadership Advisory</option>
                 <option>Leadership Coaching</option>
                 <option>Comprehensive Engagement</option>
-                <option>Other / Not Sure Yet</option>
+                <option>Not Sure Yet — Let's Talk</option>
               </select>
             </div>
             <div class="form-group">
@@ -1716,7 +1780,7 @@
         <div>
           <span class="footer-brand-logo">Balhance</span>
           <p class="footer-brand-desc">
-            Helping organizations cultivate the conditions for sustainable human performance through research, advisory, and leadership coaching.
+            A research-driven consulting and coaching practice helping growing organizations and nonprofits build healthier workplaces, stronger leaders, and cultures that last.
           </p>
         </div>
 
@@ -1724,7 +1788,7 @@
           <div class="footer-col-title">Services</div>
           <ul class="footer-links">
             <li><a href="#services">Organizational Research</a></li>
-            <li><a href="#services">Executive Advisory</a></li>
+            <li><a href="#services">Leadership Advisory</a></li>
             <li><a href="#coaching">Leadership Coaching</a></li>
             <li><a href="#approach">Our Approach</a></li>
           </ul>
@@ -1749,7 +1813,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2025 Balhance. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 Balhance. Where balance creates the conditions for everything to enhance.</p>
         <ul class="footer-legal">
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Service</a></li>
