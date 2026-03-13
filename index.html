@@ -1891,9 +1891,9 @@ const words = ["Organization.", "Employees.", "Leadership.", "Community."];
 const el = document.getElementById('typed');
 
 let wordIndex = 0, charIndex = 0, deleting = false;
-const TYPE_SPEED  = 90;   // ms per character typing forward
-const DELETE_SPEED = 45;  // ms per character deleting
-const PAUSE = 2000;       // ms to hold after fully typed
+const TYPE_SPEED  = 140;   // ms per character typing forward
+const DELETE_SPEED = 90;  // ms per character deleting
+const PAUSE = 2500;       // ms to hold after fully typed
 
 function tick() {
   const current = words[wordIndex];
