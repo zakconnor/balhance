@@ -1843,14 +1843,46 @@
       }
     });
 
-    // Contact form feedback
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e) => {
+    // Contact form — sends to zconnor@findbalhance.com via Formspree
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = form.querySelector('.form-submit');
-      btn.textContent = 'Thank you — we\'ll be in touch soon.';
-      btn.style.background = '#1a5c3a';
+      const btn = contactForm.querySelector('.form-submit');
+      btn.textContent = 'Sending…';
       btn.disabled = true;
+
+      const payload = {
+        first_name:   document.getElementById('fname').value.trim(),
+        last_name:    document.getElementById('lname').value.trim(),
+        _replyto:     document.getElementById('email').value.trim(),
+        title_org:    document.getElementById('title').value.trim(),
+        area_of_interest: document.getElementById('service').value,
+        message:      document.getElementById('message').value.trim(),
+      };
+
+      try {
+        const res = await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          btn.textContent = 'Thank you — we\'ll be in touch soon.';
+          btn.style.background = '#1a5c3a';
+          contactForm.reset();
+        } else {
+          const data = await res.json();
+          btn.textContent = 'Something went wrong. Please try again.';
+          btn.style.background = 'var(--red)';
+          btn.disabled = false;
+          console.error('Formspree error:', data);
+        }
+      } catch (err) {
+        btn.textContent = 'Could not send. Please email us directly.';
+        btn.style.background = 'var(--red)';
+        btn.disabled = false;
+      }
     });
 
     // Subtle entrance animations via IntersectionObserver
