@@ -395,6 +395,10 @@
             <span class="error-msg" id="passwordErr">Please enter your password.</span>
           </div>
 
+          <div class="cf-turnstile" style="margin-top:0.75rem;"
+            data-sitekey="YOUR_TURNSTILE_SITE_KEY"
+            data-theme="light"></div>
+
           <button type="submit" class="btn-submit" id="submitBtn">Sign In</button>
 
         </form>
@@ -422,6 +426,7 @@
 
   </div>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const { createClient } = window.supabase;
@@ -493,10 +498,17 @@
       }
       if (!ok) return;
 
+      const captchaToken = turnstile.getResponse();
+      if (!captchaToken) {
+        alertEl.textContent = 'Please complete the security check.';
+        alertEl.className   = 'alert alert-error visible';
+        return;
+      }
+
       submitBtn.disabled    = true;
       submitBtn.textContent = 'Signing in…';
 
-      const { error } = await sb.auth.signInWithPassword({ email, password: pw });
+      const { error } = await sb.auth.signInWithPassword({ email, password: pw, options: { captchaToken } });
 
       if (error) {
         alertEl.textContent = error.message === 'Invalid login credentials'
@@ -505,6 +517,7 @@
         alertEl.className   = 'alert alert-error visible';
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Sign In';
+        turnstile.reset();
       } else {
         window.location.href = 'profile.html';
       }
