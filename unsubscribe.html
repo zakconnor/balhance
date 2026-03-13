@@ -160,6 +160,8 @@
       <h1>Already unsubscribed.</h1>
       <p>This email address has already been removed from our list.</p>
       <a href="index.html" class="btn-home">Back to Balhance</a>
+      <br />
+      <button class="resubscribe-link visible" id="resubBtnAlready">Changed your mind? Re-subscribe.</button>
     </div>
 
     <!-- Error -->
@@ -217,17 +219,30 @@
       showState(data ? 'state-success' : 'state-already');
     }
 
-    // Re-subscribe button
-    document.getElementById('resubBtn').addEventListener('click', async () => {
+    // Re-subscribe handler (shared by both success and already-unsubscribed states)
+    async function handleResub(btn) {
       const params = new URLSearchParams(window.location.search);
       const token  = params.get('token');
       if (!token) return;
 
+      btn.disabled = true;
+      btn.textContent = 'Re-subscribing…';
+
       const { error } = await sb.rpc('resubscribe_by_token', { p_token: token });
-      if (!error) {
-        document.getElementById('resubBtn').textContent = 'You\'re back on the list.';
-        document.getElementById('resubBtn').disabled = true;
+
+      if (error) {
+        btn.textContent = 'Something went wrong. Please try again.';
+        btn.disabled = false;
+      } else {
+        btn.textContent = 'You\'re back on the list.';
       }
+    }
+
+    document.getElementById('resubBtn').addEventListener('click', function() {
+      handleResub(this);
+    });
+    document.getElementById('resubBtnAlready').addEventListener('click', function() {
+      handleResub(this);
     });
 
     run();

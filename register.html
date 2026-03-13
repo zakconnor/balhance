@@ -556,9 +556,11 @@
 
       // Subscribe to email list if opted in
       if (document.getElementById('emailOptIn').checked) {
-        await sb.from('email_subscribers').insert(
-          { email, name: firstName + ' ' + lastName, source: 'registration' }
-        ).then(() => {}); // ignore duplicate — email may already be subscribed
+        await sb.rpc('subscribe_or_resubscribe', {
+          p_email: email,
+          p_name: firstName + ' ' + lastName,
+          p_source: 'registration'
+        });
       }
 
       window.location.href = 'login.html?registered=1';
